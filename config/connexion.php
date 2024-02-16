@@ -5,7 +5,7 @@
         public function getConnexion(){
             
             $dns="mysql:host=localhost;dbname=gestion_pfe";
-            $utilisateure="root";
+            $utilisateur="root";
             $password="";
             $connexion=new PDO($dns,$utilisateur,$password);
             return $connexion;
