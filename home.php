@@ -8,8 +8,8 @@
       <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
 
       <!--=============== CSS ===============-->
-      <link rel="stylesheet" href="assets/css/styles.css">
-      
+      <link rel="stylesheet" href="../assets/css/styles.css">
+
     <title>Document</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
          <nav class="nav container">
             <div class="nav__data">
                <a href="#" class="nav__logo">
-                  <i class="ri-planet-line"></i> Company
+                  <i class="ri-planet-line"></i>PFE ISET RADES 
                </a>
                
                <div class="nav__toggle" id="nav-toggle">
@@ -29,11 +29,11 @@
             <!--=============== NAV MENU ===============-->
             <div class="nav__menu" id="nav-menu">
                <ul class="nav__list">
-                  <li><a href="#" class="nav__link">Home</a></li>
+                  <li><a href="login.php" class="nav__link">Login</a></li>
 
-                  <li><a href="#" class="nav__link">Company</a></li>
+                  <li><a href="inscription.php" class="nav__link">Inscription</a></li>
 
-                  <!--=============== DROPDOWN 1 ===============-->
+<!--                   
                   <li class="dropdown__item">
                      <div class="nav__link">
                         Analytics <i class="ri-arrow-down-s-line dropdown__arrow"></i>
@@ -52,7 +52,7 @@
                            </a>
                         </li>
 
-                        <!--=============== DROPDOWN SUBMENU ===============-->
+
                         <li class="dropdown__subitem">
                            <div class="dropdown__link">
                               <i class="ri-bar-chart-line"></i> Reports <i class="ri-add-line dropdown__add"></i>
@@ -79,29 +79,23 @@
                            </ul>
                         </li>
                      </ul>
-                  </li>
-                  
+                  </li>            
                   <li><a href="#" class="nav__link">Products</a></li>
-
-                  <!--=============== DROPDOWN 2 ===============-->
                   <li class="dropdown__item">
                      <div class="nav__link">
                         Users <i class="ri-arrow-down-s-line dropdown__arrow"></i>
                      </div>
-
                      <ul class="dropdown__menu">
                         <li>
                            <a href="#" class="dropdown__link">
                               <i class="ri-user-line"></i> Profiles
                            </a>                          
                         </li>
-
                         <li>
                            <a href="#" class="dropdown__link">
                               <i class="ri-lock-line"></i> Accounts
                            </a>
                         </li>
-
                         <li>
                            <a href="#" class="dropdown__link">
                               <i class="ri-message-3-line"></i> Messages
@@ -109,18 +103,15 @@
                         </li>
                      </ul>
                   </li>
-
-                  <li><a href="#" class="nav__link">Contact</a></li>
+                  <li><a href="#" class="nav__link">Contact</a></li> 
+                -->
                </ul>
             </div>
          </nav>
       </header>
-
-      <!--=============== MAIN JS ===============-->
-      <script src="assets/js/main.js"></script>
-
-    <a href="login.php">login</a>
-    <a href="inscription.php">s'inscrire</a>
     <?=$contenu?>
+
+        <!--=============== MAIN JS ===============-->
+        <script src="../assets/js/main.js"></script>
 </body>
 </html>

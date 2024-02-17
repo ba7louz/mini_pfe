@@ -1,4 +1,5 @@
 <?php
+
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
     if( isset($_GET['cin']) ){
         $cin = $_GET['cin'];

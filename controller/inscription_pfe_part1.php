@@ -7,7 +7,6 @@ require_once "../model/pfe.php";
 require_once "../model/pfecrud.php";
 
 session_start();
-$_SESSION['id'] = 2 ;
 
 $etudiant = null;
 if(isset($_SESSION['id'])){

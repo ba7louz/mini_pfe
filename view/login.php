@@ -1,18 +1,29 @@
 <link rel="stylesheet" href="../login.css">
 
 <form method="post" action="../controller/login.php" id="login-form" class="login-form" >
-  <h1 class="a11y-hidden">Login Form</h1>
+  
+
+
+  <div>
+    <span class="title">Login</span>
+  </div>
+
   <div>
     <label class="label-email">
-      <input type="text" class="text" name="cin" placeholder="CIN" tabindex="1" required />
+      <input id="cin_input" type="text" class="text" name="cin" placeholder="CIN" tabindex="1" required />
       <span class="required">CIN</span>
     </label>
+    <?php
+        if($errmsg!=""){
+          ?><small class="err_mssg"><?=$errmsg?></small><?php
+      }
+      ?>
   </div>
   
   <div>
     <label class="label-password">
       <input type="password" class="text" name="mdp" placeholder="Password" tabindex="2" required/>
-      <span class="required">Password</span>
+      <span class="required">Mot de passe</span>
     </label>
   </div>
 
@@ -32,3 +43,13 @@
   </figure>
 
 </form>
+
+  <?php
+        if($errmsg!=""){
+          ?>
+          <script>
+            document.getElementById('cin_input').focus();
+          </script>
+          <?php
+        }
+  ?>

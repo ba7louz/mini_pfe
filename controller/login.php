@@ -7,7 +7,7 @@ require_once "../model/etudiant.php";
 
 $obj = new config();
 $connexion = $obj->getConnexion();
-
+$errmsg="";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["cin"], $_POST["mdp"])) {
         $cin = htmlspecialchars($_POST["cin"]);
@@ -17,16 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $res = $connexion->query($sql);
             $etudexist = $res->fetch();
             if ($etudexist) {
-                $etudID = $etudexist['id'];
-                
-                // Stocker l'URL actuelle dans la session
-                $_SESSION['url'] = $_SERVER['REQUEST_URI'];
-                
-                // Rediriger vers la page formulaire avec l'ID de l'étudiant
-                header("location: ../view/formulaire.php?id=$etudID");
+                $_SESSION['id'] = $etudexist['id']  ;
+                header("location: inscription_pfe_part1.php");
                 exit();
             } else {
-                echo "<script>alert('Identifiants incorrects. Veuillez réessayer.')</script>";
+                $errmsg = "Identifiants ou Mot de passe incorrects";
             }
         }
     }
