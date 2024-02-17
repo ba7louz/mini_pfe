@@ -42,8 +42,8 @@ form button:hover {
     font-size: 14px;
     margin-top: 5px;
 }
-
 </style>
+
 <h1>Inscription</h1>
 <form method="post" action="../controller/inscription.php">
     <label for="nom">CIN : </label>
