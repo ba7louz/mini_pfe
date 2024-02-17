@@ -38,7 +38,6 @@
 </form>
 
 <script>
-
     document.getElementById('cin_ip').addEventListener('keyup',()=>{
         let str = document.getElementById('cin_ip').value;
         cin_existence(str);
