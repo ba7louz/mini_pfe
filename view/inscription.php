@@ -1,3 +1,49 @@
+<style>
+    /* Styles généraux pour le formulaire */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Style pour les champs de formulaire */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* Style pour les boutons de formulaire */
+form button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #333;
+}
+
+/* Style pour les messages d'erreur */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Style pour les messages de succès */
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+</style>
 <h1>Inscription</h1>
 <form method="post" action="../controller/inscription.php">
     <label for="nom">CIN : </label>
