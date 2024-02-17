@@ -84,28 +84,27 @@ form button:hover {
 </form>
 
 <script>
-
-document.getElementById('cin_ip').addEventListener('keyup',()=>{
-    let str = document.getElementById('cin_ip').value;
-    cin_existence(str);
-})
-function cin_existence(str) {
-  if (str.length === 0) {
-    document.getElementById("cin_err").innerHTML = "" ;
-    return;
-  }
-  fetch("getcinAjax.php?cin=" + str)
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById("cin_err").innerHTML = data;
+    document.getElementById('cin_ip').addEventListener('keyup',()=>{
+        let str = document.getElementById('cin_ip').value;
+        cin_existence(str);
     })
-}
+    function cin_existence(str) {
+    if (str.length === 0) {
+        document.getElementById("cin_err").innerHTML = "" ;
+        return;
+    }
+    fetch("getcinAjax.php?cin=" + str)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("cin_err").innerHTML = data;
+        })
+    }
 
-let errorMessageElement = document.getElementById('err');
-if (errorMessageElement) {
-    setTimeout(() => {
-        errorMessageElement.remove();
-    }, 15000); // Remove the element after 15 seconds
-}
+    let errorMessageElement = document.getElementById('err');
+    if (errorMessageElement) {
+        setTimeout(() => {
+            errorMessageElement.remove();
+        }, 15000); // Remove the element after 15 seconds
+    }
 
 </script>

@@ -7,6 +7,14 @@
             $obj=new config();
             $this->connexion=$obj->getConnexion();
         }
+
+        
+        public function getetudiantById($id){
+            $sql="select * from etudiant where id=$id";
+            $res=$this->connexion->query($sql);
+            return  $res->fetch(PDO::FETCH_ASSOC);
+        }
+
         public function getetudiantByCin($cin){
             $sql="select * from etudiant where cin=$cin";
             $res=$this->connexion->query($sql);

@@ -11,6 +11,18 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
                 exit();
             }
         }
-    }      
+        echo "";
+    } else if( isset($_GET['getNameByCin']) ){
+        $cin = $_GET['getNameByCin'];
+        if(preg_match('/^[0-9]+$/', $cin)){
+            require_once "../model/crudetudiant.php";
+            $ce=new crudetudiant();
+            $etudiant = $ce->getetudiantByCin($cin); 
+            if($etudiant){
+                echo $etudiant['nom']." ".$etudiant['prenom'];
+                exit();
+            }
+        }
+        echo "";
+    }
 }
-echo "";
