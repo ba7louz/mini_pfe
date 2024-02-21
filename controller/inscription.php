@@ -2,6 +2,15 @@
 ob_start();
 require_once "../model/crudetudiant.php";
 require_once "../model/etudiant.php";
+session_start();
+
+// redirect
+require_once "auth/auth.php";
+$auth = new auth();
+if($auth->check()){
+    header("location: inscription_pfe_part1.php");
+}
+
 
 $errorMessage = "";
 $successMessage = "";
