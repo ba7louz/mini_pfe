@@ -1,3 +1,11 @@
+<?php
+// Global includes
+require_once "auth/auth.php";
+$Logged = (new auth)->check();
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,30 +37,36 @@
             <!--=============== NAV MENU ===============-->
             <div class="nav__menu" id="nav-menu">
                <ul class="nav__list">
+
+               <?php if (!$Logged){
+               ?>
                   <li><a href="login.php" class="nav__link">Login</a></li>
-
                   <li><a href="inscription.php" class="nav__link">Inscription</a></li>
+               <?php
+               }else{ 
+               ?>
 
-<!--                   
                   <li class="dropdown__item">
                      <div class="nav__link">
-                        Analytics <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        Profil <i class="ri-arrow-down-s-line dropdown__arrow"></i>
                      </div>
-
                      <ul class="dropdown__menu">
                         <li>
                            <a href="#" class="dropdown__link">
-                              <i class="ri-pie-chart-line"></i> Overview
+                           <i class="ri-user-fill"></i> Profil
                            </a>                          
                         </li>
-
-                        <li>
-                           <a href="#" class="dropdown__link">
-                              <i class="ri-arrow-up-down-line"></i> Transactions
+                        <li id="logoutact"> 
+                           <a href="#" class="dropdown__link" >
+                              <i class="ri-logout-box-r-line"></i> déconnexion
                            </a>
                         </li>
-
-
+                     </ul>
+                  </li>
+               <?php
+               }
+               ?>
+<!--
                         <li class="dropdown__subitem">
                            <div class="dropdown__link">
                               <i class="ri-bar-chart-line"></i> Reports <i class="ri-add-line dropdown__add"></i>
@@ -110,9 +124,29 @@
          </nav>
       </header>
       <div class="virtual-height"></div>
-    <?=$contenu?>
+         
+         <?=$contenu?>
+         <!--=============== MAIN JS ===============-->
+         
+         <script src="../assets/js/main.js"></script>
+         <script>
 
-        <!--=============== MAIN JS ===============-->
-        <script src="../assets/js/main.js"></script>
+               document.getElementById('logoutact').addEventListener('click', () => {
+                  
+               fetch("logout.php")
+               .then(response => {
+                  if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                  }
+                  return response.text();
+               })
+               .then(data => {
+                  location.reload();
+               })
+               });
+            </script>
+
 </body>
+
+
 </html>

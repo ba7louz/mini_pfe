@@ -14,7 +14,7 @@ class auth {
     }
     public function login( $payload ) // set the token in new session
     {
-        $jwt = JWT::encode( $data, $this->secret_key, 'HS256' );
+        $jwt = JWT::encode( $payload, $this->secret_key, 'HS256' );
         $_SESSION['token'] = $jwt ;
     }
     public function getUserData() // get data user
@@ -24,10 +24,13 @@ class auth {
     }
     public function check() // return true if the token is valid and the user exists -- delete the expired-token or if the user does not exist
     {
-        if( $_SESSION['token'] ){
+        if( isset($_SESSION['token']) ){
             $decoded = JWT::decode($_SESSION['token'], new Key($this->secret_key, "HS256") );
             $etudiant = ( new crudetudiant() )->getetudiantById($decoded->user_id);
             return ( $etudiant ?  true :  false) ;
         }
+    }
+    public function logout(){
+        session_destroy();
     }
 }

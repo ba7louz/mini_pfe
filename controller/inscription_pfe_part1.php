@@ -6,9 +6,12 @@ require_once "../model/etudiant.php";
 require_once "../model/pfe.php";
 require_once "../model/pfecrud.php";
 
-
+//redirect
 require_once "auth/auth.php";
 $auth = new auth();
+if(!$auth->check()){
+    header("location: login.php");
+}
 
 
 $etudiant = null;
