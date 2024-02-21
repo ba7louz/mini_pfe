@@ -7,12 +7,14 @@ require_once "../model/pfe.php";
 require_once "../model/pfecrud.php";
 
 session_start();
-
+$secret_key = "Cr7";
 $etudiant = null;
-if(isset($_SESSION['id'])){
-    $etudiant=(new crudetudiant())->getetudiantById($_SESSION['id']) ;
+if(isset($_SESSION['token'])){
+    $decoded = JWT::decode($_SESSION['token'], $secret_key, array('HS256'));
+    $user_id = $decoded->user_id;
+    $etudiant=(new crudetudiant())->getetudiantById($user_id) ;
     if(!$etudiant){
-        header('location:inscription.php');
+        header('location:login.php');
         exit();
     }
 }

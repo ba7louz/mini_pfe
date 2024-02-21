@@ -109,6 +109,7 @@
             </div>
          </nav>
       </header>
+      <div class="virtual-height"></div>
     <?=$contenu?>
 
         <!--=============== MAIN JS ===============-->

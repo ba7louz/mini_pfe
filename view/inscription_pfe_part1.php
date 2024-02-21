@@ -8,7 +8,6 @@
         <label for="">
             Nom et Prenom <input disabled type="text" value="<?=$etudiant['nom']?> <?=$etudiant['prenom']?>" ><br>
         </label>
-
         <h2>Etudiant 2</h2>
         <label for="">
             CIN <input type="text" placeholder="Saisir votre CIN" name="cin2" id="cin_ip">
@@ -20,7 +19,7 @@
         <label for="">
             Titre Projet* <input type="text" name="titre" placeholder="Saisir votre titre de projet"  >
         </label> <br>
-        <input type="submit" value="SUBMIT" >
+        <input type="submit" value="Suivant" >
     </form>
 </div>
 
@@ -29,7 +28,6 @@
         let str = document.getElementById('cin_ip').value;
         cin_existence(str);
     })
-
     function cin_existence(str) {
     if (str.length === 0) {
         document.getElementById("fullname2").value = "" ;
@@ -41,7 +39,6 @@
             document.getElementById("fullname2").value = data;
         })
     }
-
     let errorMessageElement = document.getElementById('err');
     if (errorMessageElement) {
         setTimeout(() => {

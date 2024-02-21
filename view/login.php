@@ -9,7 +9,7 @@
   </div>
 
   <div>
-    <label class="label-email">
+    <label class="label-cin">
       <input id="cin_input" type="text" class="text" name="cin" placeholder="CIN" tabindex="1" required />
       <span class="required">CIN</span>
     </label>

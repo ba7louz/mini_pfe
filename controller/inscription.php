@@ -19,7 +19,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
             $ce=new crudetudiant();
             $verif=$ce->getetudiantByCin($cin);
             if($verif){
-                $errorMessage = "votre CIN $cin existe déja dans la base de données";
+                $errorMessage = "CIN est déjà existe";
             }else{
                 $ce->addetudiant($etudiant);
                 $successMessage = "ajout avec succés";

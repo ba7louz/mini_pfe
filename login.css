@@ -1,12 +1,7 @@
 html, body {
-  align-items: center;
+
   background: #f2f4f8;
-  border: 0;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
+
 }
 html ,body form{
   font-family: Helvetica, Arial, sans-serif;
@@ -38,6 +33,7 @@ form {
   --shadeNormal: 0.5;
   --borderRadius: 0.125rem;
   --highlight: #306090;
+  
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--borderRadius);
@@ -45,9 +41,19 @@ form {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  position: relative;
+  position: sticky;
+  top: 100px;
   overflow: hidden;
-  width: min-content;
+  width: auto;
+  margin: auto;
+  max-width: 470px;
+  margin-top: 50px;
+}
+
+@media screen and ( max-width:490px) {
+  form{
+    width: 90%;
+  }  
 }
 
 form .email, form .email a {
@@ -60,7 +66,18 @@ form .email, form .email a {
   outline-offset: 2px;
   display: inline;
 }
-
+select {
+  border: 1px solid var(--border);
+  border-radius: var(--borderRadius);
+  box-sizing: border-box;
+  font-size: 1rem;
+  height: 2.25rem;
+  line-height: 1.25rem;
+  margin-top: 0.25rem;
+  order: 2;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.25s;
+}
 form a:hover {
   color: hsl(var(--fgColorH), var(--fgColorS), calc(var(--fgColorL) * 0.85));
   transition: color 0.25s;
@@ -148,7 +165,6 @@ input {
   margin-top: 0.25rem;
   order: 2;
   padding: 0.25rem 0.5rem;
-  width: 15rem;
   transition: all 0.25s;
 }
 
@@ -163,6 +179,7 @@ input[type="submit"] {
   outline-offset: 2px;
   padding-left: 0;
   text-transform: uppercase;
+  width: -webkit-fill-available;
 }
 
 input[type="checkbox"]:focus + label span::before,
@@ -240,9 +257,9 @@ figure {
   margin: auto auto;
   margin-bottom: 1rem;
   order: 1;
-  padding-top: 60%;
+  padding-top: 50%;
   position: relative;
-  width: 60%;
+  width: 50%;
   overflow: hidden;
 }
 small.err_mssg {
@@ -405,4 +422,17 @@ figure .shirt-2 {
 figure .shirt-2 {
   left: 52.5%;
   transform: skew(10deg) rotate(-15deg)
+}
+/* Style pour les messages d'erreur */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Style pour les messages de succès */
+.success-message {
+  color: green;
+  font-size: 14px;
+  margin-top: 5px;
 }
