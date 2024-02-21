@@ -3,7 +3,15 @@
     <form method="post" action="../controller/inscription.php">
         <br>
         <div>
-            <span class="title">Inscription <?php ?></span>
+            <span class="title">Inscription <?php 
+                $sne=date('Y')-1;
+                $amjey=date('Y');
+                if(date('m')>=6){
+                        $sne++;
+                        $amjey++;
+                }
+                echo $sne . '-' . $amjey;
+            ?></span>
         </div>
         <div>
             <label for="cin_ip">
