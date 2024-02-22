@@ -1,4 +1,4 @@
-<style>
+<!--style>
     body {
         background: linear-gradient(to bottom, #ffffff, #87ceeb, #3498db);
         margin: 0;
@@ -42,42 +42,90 @@
         padding: 10px;
         cursor: pointer;
     }
-</style>
-
+</style-->
+<link rel="stylesheet" href="../login.css">
 
 <div class="form-container">
-    <h1>Inscription pour PFE (années)</h1>
+    
+    
     <form action="../controller/inscription_pfe_part1.php" method="post">
-        <h2>Etudiant 1</h2>
-        <label for="">
-            CIN<input disabled type="text" value="<?=$etudiant['cin']?>" ><br>
-        </label>
-        <label for="">
-            Nom et Prenom <input disabled type="text" value="<?=$etudiant['nom']?> <?=$etudiant['prenom']?>" ><br>
-        </label>
-        <h2>Etudiant 2</h2>
-        <label for="">
-            CIN <input type="text" placeholder="Saisir votre CIN" name="cin2" id="cin_ip">
-        </label><br>
-        <label for="">
-            Nom et Prenom <input  disabled type="text" name="fullname" placeholder="saisié automatiquement" id='fullname2'>
-        </label>
-        <h2>Sujet PFE</h2>
-        <label for="">
-            Titre Projet* <input type="text" name="titre" placeholder="Saisir votre titre de projet"  >
-        </label> <br>
-        <label for="">
-            Encadreur_ISET <input type="text" name="encadreur_iset" placeholder="Saisir votre encadreur de projet">
-        </label><br>
-        <label for="">
-            Nom_entreprise* <input type="text" name="nom_entreprise" placeholder="Saisir le nom de l'entreprise" required>
-        </label><br>
-        <label for="">
-            Encadreur_entreprise <input type="text" name="encadreur_entreprise" placeholder="saisir le nom de l'encadreur de l'entreprise">
-        </label><br>
-        <label for="">Importer fiche PFE:
-            <input type="file" name="fiche_pfe" accept=".pdf">
-        </label><br>
+        <div>
+            <span class="title">INSCRIPTION-PFE <?php 
+                $sne=date('Y')-1;
+                $amjey=date('Y');
+                if(date('m')>=6){
+                        $sne++;
+                        $amjey++;
+                }
+                echo $sne . '-' . $amjey;
+            ?></span>
+        </div>
+
+        
+
+        <div><br><h3>Etudiant 1</h3>
+            <label for="cin1" >
+                <input disabled type="text" value="<?=$etudiant['cin']?>" id="cin1" >
+                <span class="required">CIN</span>
+            </label>
+        </div>
+        <div>
+            <label for="fullname1">
+                <input id="fullname1" disabled type="text" value="<?=$etudiant['nom']?> <?=$etudiant['prenom']?>" >
+                <span class="required">Nom et Prenom</span>
+            </label>
+        </div>
+
+        
+        <div><br><h3>Etudiant 2</h3>
+            <label for="cin_ip">
+                <input type="text" placeholder="Saisir votre CIN" name="cin2" id="cin_ip">
+                <span class="required">CIN</span>
+            </label>
+        </div>
+
+        <div>
+            <label for="fullname2">
+                <input id="fullname2" disabled type="text" name="fullname" placeholder="saisié automatiquement" id='fullname2'>
+                <span class="required">Nom et Prenom </span>
+            </label>
+        </div>
+
+
+        
+        
+        <div> <br><h3>Sujet PFE</h3>    
+            <label for="titre">
+                 <input id="titre" type="text" name="titre" placeholder="Saisir votre titre de projet"  >
+                <span class="required">Titre Projet</span> 
+            </label>
+        </div>
+        <div>
+            <label for="encdrnt">
+                 <input id="encdrnt" type="text" name="encadreur_iset" placeholder="Saisir votre encadreur de projet">
+                <span class="required">Encadreur ISET </span> 
+            </label>
+        </div>
+        <div>
+            <label for="entrpr">
+                <input id="entrpr" type="text" name="nom_entreprise" placeholder="Saisir le nom de l'entreprise" required>
+                <span class="required">Nom entreprise* </span> 
+            </label>
+        </div>
+
+        <div>
+            <label for="encdrntentr">
+                 <input id="encdrntentr" type="text" name="encadreur_entreprise" placeholder="saisir le nom de l'encadreur de l'entreprise">
+                <span class="required">Encadreur entreprise </span> 
+            </label>
+        </div>
+        
+        <div>
+            <label for="file_pfe">
+                <input id="file_pfe" type="file" name="fiche_pfe" accept=".pdf">
+                <span class="required">Importer fiche PFE </span> 
+            </label>
+        </div>
         <input type="submit" value="Suivant">
     </form>
 </div>

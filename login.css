@@ -1,12 +1,8 @@
+html, body {
 
+  background: #f2f4f8;
 
-  html,body {
-    background: linear-gradient(to bottom, #ffffff, #87ceeb, #3498db);
-    margin: 0;
-    padding: 0;
-    height: 100%;
 }
-
 html ,body form{
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -37,7 +33,6 @@ form {
   --shadeNormal: 0.5;
   --borderRadius: 0.125rem;
   --highlight: #306090;
-  
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--borderRadius);
@@ -52,6 +47,7 @@ form {
   margin: auto;
   max-width: 470px;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 @media screen and ( max-width:490px) {
@@ -174,7 +170,7 @@ input {
 
 input[type="submit"] {
   color: hsl(var(--bgColorH), var(--bgColorS), var(--bgColorL));
-  background: linear-gradient(to bottom, #ffffff, #87ceeb, #3498db);
+  background: hsl(var(--fgColorH), var(--fgColorS), var(--fgColorL));
   font-size: 0.75rem;
   font-weight: bold;
   margin-top: 0.625rem;
