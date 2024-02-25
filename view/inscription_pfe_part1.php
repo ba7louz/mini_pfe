@@ -90,13 +90,10 @@
                 <span class="required">Nom et Prenom </span>
             </label>
         </div>
-
-
         
-        
-        <div> <br><h3>Sujet PFE</h3>    
+        <div> <br><!--h3>Sujet PFE</h3-->    
             <label for="titre">
-                 <input id="titre" type="text" name="titre" placeholder="Saisir votre titre de projet"  >
+                <textarea id="titre" name="titre" id="" rows="3" placeholder="Saisir votre titre de projet"></textarea>
                 <span class="required">Titre Projet</span> 
             </label>
         </div>

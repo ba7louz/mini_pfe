@@ -20,7 +20,20 @@
             $res=$this->connexion->query($sql);
             return  $res->fetch(PDO::FETCH_ASSOC);
         }
-        
+        public function modifetudiant(etudiant $et){
+            $sql="  update etudiant set
+                    cin = {$et->getCin()},
+                    nom = '{$et->getNom()}',
+                    prenom ='{$et->getPrenom()}',
+                    email = '{$et->getEmail()}',
+                    id_classe ={$et->getIdclasse()},
+                    password = '{$et->getPassword()}'
+                    where id {$et->getId()}
+                )";
+                $res=$this->connexion->exec($sql);
+                return $res;
+        }
+
         public function addetudiant(etudiant $et){
             $sql="insert into etudiant values(
                 null,

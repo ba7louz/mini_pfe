@@ -16,22 +16,19 @@ $errorMessage = "";
 $successMessage = "";
 
 if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
-    if(isset($_POST["cin"],$_POST["nom"],$_POST["prenom"],$_POST["email"],$_POST["classe"],$_POST["mdp"])){
+    if(isset($_POST["cin"],$_POST["mdp"] )){
         $cin=htmlspecialchars($_POST["cin"]);
-        $nom=htmlspecialchars($_POST["nom"]);
-        $prenom=htmlspecialchars($_POST["prenom"]);
-        $email=htmlspecialchars($_POST["email"]);
-        $id_classe=htmlspecialchars($_POST["classe"]);
         $password=htmlspecialchars($_POST["mdp"]); 
-        if($cin != "" && $nom != "" && $prenom != "" && $email != "" && $id_classe !="" && $password != ""){
-            $etudiant=new etudiant(null,$cin,$nom,$prenom,$email,$id_classe,$password);
+        if($cin != "" || $password != ""){
+
             $ce=new crudetudiant();
-            $verif=$ce->getetudiantByCin($cin);
+            $etudiant = $ce->getetudiantByCin($cin);
+            $e1 = new etudiant($etudiant->id,$etudiant->cin,$etudiant->nom,$etudiant->prenom,$etudiant->email,$etudiant->id_classe,$etudiant->password);
+            $verif = $ce->modifetudiant($e1);
             if($verif){
-                $errorMessage = "CIN est déjà existe";
-            }else{
-                $ce->addetudiant($etudiant);
                 $successMessage = "ajout avec succés";
+            }else{
+                $errorMessage = "Ressayez";
             }
         }
     }

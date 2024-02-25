@@ -20,43 +20,17 @@
             </label>
             <small id="cin_err" class="error-message"></small>
         </div>
-        
-        <div>
-            <label for="nom1">
-                <input class="text" type="text" id="nom1" name="nom" tabindex="2" required>
-                <span class="required">Nom</span>
-            </label>
-        </div>
-        
-        <div>
-            <label for="prenom1">
-                <input class="text" type="text" id="prenom1" name="prenom" tabindex="3" required>
-                <span class="required">Prenom</span>
-            </label>
-        </div>
-        <div>
-            <label for="classe1">
-                <select name="classe" id="classe1" tabindex="4">
-                    <option value="-1" checked>Choisir votre classe</option>
-                    <?php foreach($classes as $c): ?>
-                    <option value="<?=$c['id'];?>">
-                        <?= $c['nom_classe'];?>
-                    </option>
-                    <?php endforeach ?>
-                </select>
-                <span class="required">Choisir une Classe</span>
-            </label>
-        </div>
-        <div>
-            <label for="email">
-                <input class="text" id="email" type="email" name="email" tabindex="5"   required>
-                <span class="required">Email</span>
-            </label>
-        </div>
+
         <div>
             <label for="password">
                 <input class="text" id="password" type="password" name="mdp" tabindex="6" required>
-                <span class="required">mot de passe</span>
+                <span class="required">Mot de passe</span>
+            </label>
+        </div>
+        <div>
+            <label for="password2">
+                <input class="text" id="password2" type="password2" name="mdp2" tabindex="6" required>
+                <span class="required">Confirmer votre mot de passe</span>
             </label>
         </div>
 
@@ -73,7 +47,7 @@
     </form>
 
 <script>
-    document.getElementById('cin_ip').addEventListener('keyup',()=>{
+    document.getElementById('cin_ip').addEventListener('blur',()=>{
         let str = document.getElementById('cin_ip').value;
         cin_existence(str);
     })
@@ -85,10 +59,13 @@
     fetch("getcinAjax.php?cin=" + str)
         .then(response => response.text())
         .then(data => {
-            if(data != "" )
-                document.getElementById("cin_err").innerHTML = "CIN est déjà existe" ;
-            else 
+            if(data != "" ){
                 document.getElementById("cin_err").innerHTML = "" ;
+            }
+            else{ 
+                document.getElementById("cin_err").innerHTML = "CIN n'existe" ;
+                // document.getElementById('cin_ip').focus();
+            }
         })
     }
 
