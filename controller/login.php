@@ -20,11 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cin = htmlspecialchars($_POST["cin"]);
         $password = htmlspecialchars($_POST["mdp"]);
         if ($cin != "" && $password != "") {
+            // Vérification pour les étudiants
             $sql = "SELECT * FROM etudiant WHERE cin='$cin' AND password='$password' ";
             $res = $connexion->query($sql);
             $etudexist = $res->fetch();
             if ($etudexist) {
-
                 $payload = array(
                     "user_id" => $etudexist['id'],
                     "type" => 0  // 0 -> etudiant
@@ -33,9 +33,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 header("location: inscription_pfe_part1.php");
                 exit();
-            } else {
-                $errmsg = "Identifiants ou Mot de passe incorrects";
+            } 
+            
+            $sql_admin = "SELECT * FROM admin WHERE login='$cin' AND password='$password' ";
+            $res_admin = $connexion->query($sql_admin);
+            $adminexist = $res_admin->fetch();
+            if ($adminexist) {
+                header("location: admin.php");
+                exit();
             }
+
+            $errmsg = "Identifiants ou Mot de passe incorrects";
         }
     }
 }
