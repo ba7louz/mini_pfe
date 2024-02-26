@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 );
                 $auth->login($payload);
 
-                header("location: inscription_pfe_part1.php");
+                header("location: inscription_pfe_part1.php?cin=$cin");
                 exit();
             } 
             

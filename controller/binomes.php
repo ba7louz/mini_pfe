@@ -1,4 +1,5 @@
 <?php
+ob_start();
 
 require_once "../config/connexion.php";
 $obj=new config();
@@ -36,4 +37,6 @@ $etudiant2 = array(
 
 
 include "../view/binomes.php";
+$contenu=ob_get_clean();
+include "../home.php";
 ?>

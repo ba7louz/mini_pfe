@@ -45,6 +45,7 @@
     </style>
 </head>
 <body>
+    
     <h1>Liste des binômes</h1>
     <table>
         <tr>
@@ -67,6 +68,9 @@
             <td><a href="binomes.php?pfe_id=<?php echo $binome['pfe_id']; ?>" class="btn-link">Afficher</a></td>
         </tr>
         <?php endforeach; ?>
+        
     </table>
+    
+
 </body>
 </html>

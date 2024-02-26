@@ -1,6 +1,8 @@
 <?php
 session_start();
 ob_start();
+require_once "auth/auth.php";
+$Logged = (new auth)->check();
 require_once "../config/connexion.php";
 $obj=new config();
 $connexion=$obj->getConnexion();
@@ -21,4 +23,5 @@ $binomes = $resultat->fetchAll(PDO::FETCH_ASSOC);
 include "../view/admin.php";
 $contenu=ob_get_clean();
 include "../home.php";
+
 ?>
