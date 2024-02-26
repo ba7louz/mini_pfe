@@ -21,15 +21,17 @@
             return  $res->fetch(PDO::FETCH_ASSOC);
         }
         public function modifetudiant(etudiant $et){
-            $sql="  update etudiant set
+            $sql="  
+                    update etudiant set
                     cin = {$et->getCin()},
                     nom = '{$et->getNom()}',
                     prenom ='{$et->getPrenom()}',
                     email = '{$et->getEmail()}',
                     id_classe ={$et->getIdclasse()},
                     password = '{$et->getPassword()}'
-                    where id {$et->getId()}
-                )";
+                    where id = {$et->getId()}
+            ";
+            echo "$sql";
                 $res=$this->connexion->exec($sql);
                 return $res;
         }

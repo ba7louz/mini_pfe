@@ -13,12 +13,9 @@ if(!$auth->check()){
     header("location: login.php");
 }
 
-
 $etudiant = null;
-if(isset($_SESSION['token'])){
-
+if( isset($_SESSION['token']) ){
     $data = $auth->getUserData();
-
     $etudiant = ( new crudetudiant() )->getetudiantById($data->user_id);
     if(!$etudiant){
         header('location:login.php');
@@ -32,6 +29,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
     if( $_POST["cin2"] && $_POST["titre"]){       
     }
 }
+
 include "../view/inscription_pfe_part1.php";
 $contenu = ob_get_clean();
 include "../home.php";

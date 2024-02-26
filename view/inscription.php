@@ -3,6 +3,7 @@
     <form method="post" action="../controller/inscription.php">
         <br>
         <div>
+        <div>
             <span class="title">Inscription <?php 
                 $sne=date('Y')-1;
                 $amjey=date('Y');
@@ -35,7 +36,10 @@
         </div>
 
         <div>
-            <input type="submit" value="S'incrire" />
+            <label for="">
+                <input type="submit" value="S'incrire"/>
+            </label>
+            <small id="ser_err" class="error-message"></small>
         </div>
         
         
@@ -69,7 +73,7 @@
         })
     }
 
-    let errorMessageElement = document.getElementById('cin_err');
+    let errorMessageElement = document.getElementById('ser_err');
     
         <?php
             if( $errorMessage!="" ){
