@@ -11,4 +11,9 @@
             $res=$this->connexion->query($sql);
             return $res->fetchALL(PDO::FETCH_ASSOC);
         }
+        public function getById( $id ){
+            $sql = "select * from classe where id = $id";
+            $res=$this->connexion->query($sql);
+            return $res->fetch(PDO::FETCH_ASSOC);
+        }
     }

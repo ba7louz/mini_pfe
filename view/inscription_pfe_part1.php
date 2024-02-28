@@ -65,43 +65,46 @@
             <div id="part1" class="part1 part">
                 <div><br><h3>Etudiant 1</h3>
                     <label for="cin1" >
-                        <input disabled type="text" value="<?=$etudiant['cin']?>" id="cin1" >
+                        <input class="text" disabled type="text" value="<?=$etudiant['cin']?>" id="cin1" >
                         <span class="required">CIN</span>
                     </label>
                 </div>
                 <div>
                     <label for="fullname1">
-                        <input id="fullname1" disabled type="text" value="<?=$etudiant['nom']?> <?=$etudiant['prenom']?>" >
+                        <input class="text" id="fullname1" disabled type="text" value="<?=$etudiant['nom']?> <?=$etudiant['prenom']?>" >
                         <span class="required">Nom et Prenom</span>
                     </label>
                 </div>
                 <div>
-                    <label for="fullname1">
-                        <input id="fullname1" disabled type="text" value="<?=$etudiant['nom']?> <?=$etudiant['prenom']?>" >
-                        <span class="required">Nom et Prenom</span>
+                    <label for="classe1">
+                        <input class="text" id="classe1" disabled type="text" value="<?=(new crudclasse())->getById($etudiant['id_classe'])['nom_classe']?>" >
+                        <span class="required">Classe</span>
                     </label>
                 </div>
                 
                 <div><br><h3>Etudiant 2</h3>
                     <label for="cin_ip">
-                        <input type="text" placeholder="Saisir votre CIN" name="cin2" id="cin_ip">
+                        <input class="text" type="text" placeholder="Saisir votre CIN" name="cin2" id="cin_ip">
                         <span class="required">CIN</span>
                     </label>
                 </div>
 
                 <div>
                     <label for="fullname2">
-                        <input id="fullname2" disabled type="text" name="fullname" placeholder="saisié automatiquement" id='fullname2'>
+                        <input class="text" id="fullname2" disabled type="text" name="fullname" placeholder="saisié automatiquement" id='fullname2'>
                         <span class="required">Nom et Prenom </span>
                     </label>
                 </div>
+
                 <div>
-                    <label for="fullname2">
-                        <input id="fullname2" disabled type="text" name="fullname" placeholder="saisié automatiquement" id='fullname2'>
+                    <label for="classe2">
+                        <input class="text" id="classe2" disabled type="text" name="classe2" placeholder="saisié automatiquement" id='classe2'>
                         <span class="required">Nom et Prenom </span>
                     </label>
                 </div>
+
                 <input type="button"  value="Suivant" id="next">
+            
             </div>
 
             <div id="part2" class="part2 part">
@@ -122,20 +125,20 @@
                 <div>
                     <label for="encdrnt">
                         <input id="encdrnt" type="text" name="encadreur_iset" placeholder="Saisir votre encadreur de projet">
-                        <span class="required">Encadreur ISET </span> 
+                        <span >Encadrant ISET </span> 
                     </label>
                 </div>
                 <div>
                     <label for="entrpr">
                         <input id="entrpr" type="text" name="nom_entreprise" placeholder="Saisir le nom de l'entreprise" required>
-                        <span class="required">Nom entreprise* </span> 
+                        <span >Nom entreprise* </span> 
                     </label>
                 </div>
 
                 <div>
                     <label for="encdrntentr">
                         <input id="encdrntentr" type="text" name="encadreur_entreprise" placeholder="saisir le nom de l'encadreur de l'entreprise">
-                        <span class="required">Encadreur entreprise </span> 
+                        <span >Encadrant entreprise </span> 
                     </label>
                 </div>
                 
@@ -146,7 +149,7 @@
                     </label>
                 </div>
                 <input type="submit" value="Enregistrer">
-                <input id="prec" type="button" value="precedent">
+                <input id="prec" type="button" value="Retour">
             </div>
 
         </div>
@@ -158,7 +161,9 @@
     document.getElementById('next').addEventListener('click', () => {
         document.getElementById('divs').classList.add('next');
     });
-
+    document.getElementById('prec').addEventListener('click', () => {
+        document.getElementById('divs').classList.remove('next');
+    });
 
 
 
@@ -170,6 +175,7 @@
     function cin_existence(str) {
         if (str.length === 0) {
             document.getElementById("fullname2").value = "";
+            document.getElementById("classe2").value = "";
             return;
         }
         fetch("getcinAjax.php?getNameByCin=" + str)
@@ -177,6 +183,11 @@
             .then(data => {
                 document.getElementById("fullname2").value = data;
             })
+        fetch("getcinAjax.php?getClassByCin=" + str)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("classe2").value = data;
+        })
     }
 
     let errorMessageElement = document.getElementById('err');

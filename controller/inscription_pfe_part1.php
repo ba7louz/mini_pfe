@@ -29,6 +29,8 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
     if( $_POST["cin2"] && $_POST["titre"]){       
     }
 }
+require_once "../model/classecrud.php";
+$classes = (new crudclasse())->getAll();
 
 include "../view/inscription_pfe_part1.php";
 $contenu = ob_get_clean();

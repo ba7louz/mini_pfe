@@ -182,6 +182,7 @@ input[type="submit"],#next {
   padding-left: 0;
   text-transform: uppercase;
   width: -webkit-fill-available;
+  cursor: pointer;
 }
 
 input[type="checkbox"]:focus + label span::before,
@@ -456,7 +457,6 @@ textarea#sujet {
 
 .part {
   overflow: hidden;
-  height: 560px !important;
   width: 100%;
 }
 
@@ -475,3 +475,37 @@ textarea#sujet {
 .next {
   right: calc(100% + 2rem);
 }
+
+
+
+
+
+
+
+
+
+
+#prec {
+  color: hsl(var(--bgColorH), var(--bgColorS), var(--bgColorL));
+  background: #aa2e2e;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-top: 0.625rem;
+  order: 4;
+  outline: 1px dashed transparent;
+  outline-offset: 2px;
+  padding-left: 0;
+  text-transform: uppercase;
+  width: -webkit-fill-available;
+  cursor: pointer;
+}
+
+#prec:focus {
+  outline: 1px dashed hsl(var(--fgColorH), calc(var(--fgColorS) * 2), calc(var(--fgColorL) * 1.15));
+  outline-offset: 2px;
+}
+
+#prec:hover {
+  background: #c54141;
+}
+
