@@ -7,8 +7,12 @@
         public $nom_entreprise;
         public $encadrant_entreprise;
         public $titre;
+        public $sujet;
         public $fiche_pfe;
         public $validite;
+        public $date_demande;
+        public $date_reponse;
+
 
         public function __construct(        
                     $id,
@@ -18,8 +22,11 @@
                     $nom_entreprise,
                     $encadrant_entreprise,
                     $titre,
+                    $sujet ,
                     $fiche_pfe,
-                    $validite
+                    $validite,
+                    $date_demande,
+                    $date_reponse
             ){
                 $this->id = $id;
                 $this->id_etudiant1 = $id_etudiant1;
@@ -28,9 +35,11 @@
                 $this->nom_entreprise=$nom_entreprise;
                 $this->encadrant_entreprise = $encadrant_entreprise;
                 $this->titre=$titre;
+                $this->sujet=$sujet;
                 $this->fiche_pfe=$fiche_pfe;
                 $this->validite=$validite;
-
+                $this->date_demande = $date_demande;
+                $this->date_reponse = $date_reponse;
             }
 
         /**
@@ -165,6 +174,51 @@
          */
         public function setEncadrantEntreprise($encadrant_entreprise): self {
                 $this->encadrant_entreprise = $encadrant_entreprise;
+                return $this;
+        }
+
+        /**
+         * Get the value of sujet
+         */
+        public function getSujet() {
+                return $this->sujet;
+        }
+
+        /**
+         * Set the value of sujet
+         */
+        public function setSujet($sujet): self {
+                $this->sujet = $sujet;
+                return $this;
+        }
+
+        /**
+         * Get the value of date_demande
+         */
+        public function getDateDemande() {
+                return $this->date_demande;
+        }
+
+        /**
+         * Set the value of date_demande
+         */
+        public function setDateDemande($date_demande): self {
+                $this->date_demande = $date_demande;
+                return $this;
+        }
+
+        /**
+         * Get the value of date_reponse
+         */
+        public function getDateReponse() {
+                return $this->date_reponse;
+        }
+
+        /**
+         * Set the value of date_reponse
+         */
+        public function setDateReponse($date_reponse): self {
+                $this->date_reponse = $date_reponse;
                 return $this;
         }
     }

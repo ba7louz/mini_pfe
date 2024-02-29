@@ -5,22 +5,29 @@
         private $connexion;
         public function __construct(){
             $obj = new config();
-            $this->connexion = $obj->get_connection();
+            $this->connexion = $obj->getConnexion();
         }
         public function AjoutPfe(pfe $pfe){
-            $sql = "    insert into pfe
-                        values( 
-                            null,
-                            {$pfe->getIdEtudiant1()} ,  
-                            {$pfe->getIdEtudiant2()},
-                            '{$pfe->getEncadrantIset()}',
-                            '{$pfe->getNomEntreprise()}',
-                            '{$pfe->getEncadrantEntreprise()}',
-                            '{$pfe->getTitre()}',
-                            {$pfe->getFichePfe()},
-                            0
-                        ) ";
-            return $this->connexion->exec($sql);
+            $stmt = $this->connexion->prepare("INSERT INTO pfe VALUES (
+                    null,
+                    ? , ?, ?,?,?,?,?,?,
+                    0,
+                    NOW(),
+                    null
+                )"
+            );
+            $stmt->bindParam(1, $pfe->id_etudiant1);
+            $stmt->bindParam(2, $pfe->id_etudiant2);
+            $stmt->bindParam(3, $pfe->encadrant_iset);
+            $stmt->bindParam(4, $pfe->nom_entreprise);
+            $stmt->bindParam(5, $pfe->encadrant_entreprise);
+            $stmt->bindParam(6, $pfe->titre);
+            $stmt->bindParam(7, $pfe->sujet); 
+            $stmt->bindParam(8, $pfe->fiche_pfe, PDO::PARAM_LOB);
+            return $stmt->execute();
+        }
+        public function getPfeByEtudiant($id){
+            $sql = "select ";
         }
 
     }

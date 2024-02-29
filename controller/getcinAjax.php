@@ -25,5 +25,18 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
             }
         }
         echo "";
-    }
+    } else if( isset($_GET['getClassByCin']) ){
+        $cin = $_GET['getClassByCin'];
+        if(preg_match('/^[0-9]+$/', $cin)){
+            require_once "../model/crudetudiant.php";
+            $ce=new crudetudiant();
+            $etudiant = $ce->getetudiantByCin($cin); 
+            if($etudiant){
+                require_once "../model/classecrud.php";
+                echo (new crudclasse())->getById($etudiant['id_classe'])['nom_classe'] ;
+                exit();
+            }
+        }
+        echo "";
+    } 
 }
