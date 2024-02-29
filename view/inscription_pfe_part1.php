@@ -48,7 +48,7 @@
 <div class="form-container">
     
     
-    <form action="../controller/inscription_pfe_part1.php" method="post">
+    <form action="../controller/inscription_pfe_part1.php" method="post" enctype="multipart/form-data">
         <div>
             <span class="title">INSCRIPTION-PFE <?php 
                 $sne=date('Y')-1;
@@ -85,21 +85,21 @@
                 <div><br><h3>Etudiant 2</h3>
                     <label for="cin_ip">
                         <input class="text" type="text" placeholder="Saisir votre CIN" name="cin2" id="cin_ip">
-                        <span class="required">CIN</span>
+                        <span >CIN</span>
                     </label>
                 </div>
 
                 <div>
                     <label for="fullname2">
                         <input class="text" id="fullname2" disabled type="text" name="fullname" placeholder="saisié automatiquement" id='fullname2'>
-                        <span class="required">Nom et Prenom </span>
+                        <span >Nom et Prenom </span>
                     </label>
                 </div>
 
                 <div>
                     <label for="classe2">
                         <input class="text" id="classe2" disabled type="text" name="classe2" placeholder="saisié automatiquement" id='classe2'>
-                        <span class="required">Nom et Prenom </span>
+                        <span >Classe</span>
                     </label>
                 </div>
 
@@ -110,14 +110,14 @@
             <div id="part2" class="part2 part">
                 <div> <br><!--h3>Sujet PFE</h3-->    
                     <label for="titre">
-                        <input id="titre" name="titre" placeholder="Saisir votre titre de projet">
+                        <input id="titre" name="titre" placeholder="Saisir votre titre de projet" required>
                         <span class="required">Titre de Projet</span> 
                     </label>
                 </div>
 
                 <div>    
                     <label for="sujet">
-                        <textarea id="sujet" name="sujet" id="" rows="6" placeholder="Saisir votre sujet"></textarea>
+                        <textarea id="sujet" name="sujet" id="" rows="6" placeholder="Saisir votre sujet" required></textarea>
                         <span class="required">Sujet de Projet</span> 
                     </label>
                 </div>
@@ -144,7 +144,7 @@
                 
                 <div>
                     <label for="file_pfe">
-                        <input id="file_pfe" type="file" name="fiche_pfe" accept=".pdf">
+                        <input id="file_pfe" type="File" name="fiche_pfe" accept=".pdf">
                         <span class="required">Importer fiche PFE </span> 
                     </label>
                 </div>
