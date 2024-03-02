@@ -119,10 +119,10 @@
                 if($binome['validite']==0){
                     ?>
 
-                    <form id="mailForm" method="post" action="">
-                        <button type="button" name="action" value="refuser" class="btn-refuser">Refuser</button>
-                        <button type="button" name="action" value="accepter" class="btn-accepter">Accepter</button>
-                    </form>
+                    <form method="post" action="">
+                     <button type="submit" name="action" value="refuser" class="btn-refuser">Refuser</button>
+                          <button type="submit" name="action" value="accepter" class="btn-accepter">Accepter</button>
+</form>
 
                 <?php
                 }else{?>
@@ -133,38 +133,13 @@
         </ul>
                 
         <div class="btn-container"> 
-            <form method="get" action="../controller/afficher_fiche_pfe.php">
-                <input type="hidden" name="pfe_id" value="<?php echo $pfe_id; ?>">
-                <button type="submit">Afficher fiche PFE</button>
-            </form>
+        <form method="get" action="../controller/afficher_fiche_pfe.php">
+        <input type="hidden" name="pfe_id" value="<?php echo $pfe_id; ?>">
+        <button type="submit">Afficher fiche PFE</button>
+</form>
             
         </div>
-        
-        <div id="mailContent" style="display: none;">
-            <textarea id="mailTextArea" name="mailContent" rows="6" cols="50"></textarea>
-            <button type="button" id="sendMailButton">Envoyer</button>
-        </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelector('.btn-accepter').addEventListener('click', function() {
-                document.getElementById('mailContent').style.display = 'block';
-                document.getElementById('mailTextArea').value = "Votre PFE a été accepté.";
-            });
-
-            document.querySelector('.btn-refuser').addEventListener('click', function() {
-                document.getElementById('mailContent').style.display = 'block';
-                document.getElementById('mailTextArea').value = "Votre PFE a été refusé.";
-            });
-
-            document.getElementById('sendMailButton').addEventListener('click', function() {
-                var mailContent = document.getElementById('mailTextArea').value;
-                // Envoyer le contenu du mail (mailContent) à votre serveur ou effectuer d'autres actions nécessaires
-                // Par exemple, vous pouvez envoyer ce contenu à PHP via AJAX pour l'envoyer par e-mail
-                console.log(mailContent); // Affichage du contenu du mail dans la console (pour le test)
-            });
-        });
-    </script>
+    
 </body>
 </html>

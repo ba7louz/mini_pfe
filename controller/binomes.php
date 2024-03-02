@@ -71,7 +71,12 @@ if(isset($_GET['pfe_id'])) {
         if(isset($_POST['action'])) {
             $action = $_POST['action'];
             if($action == 'accepter') {
-                $mailContent = isset($_POST['mailContent']) ? $_POST['mailContent'] : '';
+                $sql_update_validite_date = "UPDATE pfe SET validite = 1, date_reponse = :date_reponse WHERE id = :pfe_id";
+                $stmt_update_validite_date = $connexion->prepare($sql_update_validite_date);
+                $current_date = date("Y-m-d H:i:s"); 
+                $stmt_update_validite_date->bindParam(':date_reponse', $current_date);
+                $stmt_update_validite_date->bindParam(':pfe_id', $pfe_id);
+                $stmt_update_validite_date->execute();      
                 $mail = new PHPMailer(true);
                 $mail->isSMTP();
                 $mail->Host = "smtp.gmail.com";
@@ -87,8 +92,8 @@ if(isset($_GET['pfe_id'])) {
                 $mail->Body = "Votre PFE a été accepté.";
                 $mail->send();
                 echo "<script>alert('sent')</script>";
+                header ("location:admin.php");
             }elseif($action == 'refuser'){
-                $mailContent = isset($_POST['mailContent']) ? $_POST['mailContent'] : '';
                 $mail = new PHPMailer(true);
                 $mail->isSMTP();
                 $mail->Host = "smtp.gmail.com";
@@ -101,7 +106,7 @@ if(isset($_GET['pfe_id'])) {
                 $mail->addAddress($etudiant1['email']);
                 $mail->isHTML(true);
                 $mail->Subject = "refus de votre PFE";
-                $mail->Body = $mailCotent;
+                $mail->Body = "Votre demande d'inscrit a été refusé .";
                 $mail->send();
                 echo "<script>alert('sent')</script>";
             }
