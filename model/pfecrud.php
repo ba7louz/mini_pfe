@@ -1,7 +1,7 @@
 <?php
     require_once "../config/connexion.php";
     require_once "pfe.php";
-    class crud_pfe{
+    class pfecrud{
         private $connexion;
         public function __construct(){
             $obj = new config();
