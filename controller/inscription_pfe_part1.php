@@ -18,12 +18,12 @@ $pfe = null;
 if( isset($_SESSION['token']) ){
     $data = $auth->getUserData();
     $etudiant = ( new crudetudiant() )->getetudiantById($data->user_id);
-    $pfe = (new pfecrud())->getPfeByEtudiant($etudiant);
     if(!$etudiant){
         header('location:login.php');
         exit();
     }else {
-        $pfe = (new pfecrud())->getPfeByEtudiant($etudiant);
+        $res = (new crud_pfe())->getPfeByIdEtudiant($etudiant['id']);
+        if($res) $pfe = $res;
     }
 }
 

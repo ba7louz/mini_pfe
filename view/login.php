@@ -1,9 +1,6 @@
 <link rel="stylesheet" href="../login.css">
 
 <form method="post" action="../controller/login.php" id="login-form" class="login-form" >
-  
-
-
   <div>
     <span class="title">Login</span>
   </div>
