@@ -1,6 +1,11 @@
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des binômes</title>
     <style>
-        body {
+         body {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -49,6 +54,7 @@
             <th>Nom Etudiant 2</th>
             <th>Prénom Etudiant 2</th>
             <th>Classe Etudiant 2</th>
+            <th>État</th>
             <th>Action</th>
         </tr>
         <?php foreach ($binomes as $binome) : ?>
@@ -59,8 +65,11 @@
             <td><?php echo $binome['nom2']; ?></td>
             <td><?php echo $binome['prenom2']; ?></td>
             <td><?php echo $binome['classe2']; ?></td>
+            <td><?php echo getEtatBinome($binome); ?></td>
             <td><a href="binomes.php?pfe_id=<?php echo $binome['pfe_id']; ?>" class="btn-link">Afficher</a></td>
         </tr>
         <?php endforeach; ?>
         
     </table>
+</body>
+</html>
