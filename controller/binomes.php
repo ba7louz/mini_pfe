@@ -126,37 +126,7 @@ if(isset($_GET['pfe_id'])) {
         echo "Aucun binôme trouvé pour l'identifiant PFE spécifié.";
     }
 
-    if(isset($_GET['pfe_id']) && isset($_GET['action']) && $_GET['action'] == 'afficher_fiche_pfe') {
-        $pfe_id = $_GET['pfe_id'];
     
-        // Récupérer le contenu de la fiche PFE depuis la base de données
-        $sql_select_fiche_pfe = "SELECT fiche_pfe FROM pfe WHERE id = :pfe_id";
-        $stmt_select_fiche_pfe = $connexion->prepare($sql_select_fiche_pfe);
-        $stmt_select_fiche_pfe->bindParam(':pfe_id', $pfe_id);
-        $stmt_select_fiche_pfe->execute();
-        
-        // Vérifier si la fiche PFE existe
-        if($stmt_select_fiche_pfe->rowCount() > 0) {
-            $row = $stmt_select_fiche_pfe->fetch(PDO::FETCH_ASSOC);
-            $fiche_pfe_content = $row['fiche_pfe'];
-    
-            // Générer le fichier PDF
-            require('../fpdf/fpdf.php');
-    
-            $pdf = new FPDF();
-            $pdf->AddPage();
-            $pdf->SetFont('Arial','B',16);
-            $pdf->Cell(0,10,'Fiche PFE',0,1,'C');
-            $pdf->Ln();
-            $pdf->MultiCell(0,10,$fiche_pfe_content);
-            $pdf->Output('Fiche_PFE.pdf', 'D'); // "D" pour le téléchargement du fichier directement
-            exit;
-        } else {
-            // Gérer le cas où aucune fiche PFE n'est trouvée
-            echo "Aucune fiche PFE trouvée.";
-            exit;
-        }
-    }
 } else {
     // Gérer le cas où l'identifiant PFE n'est pas passé dans l'URL
     echo "L'identifiant PFE n'est pas spécifié dans l'URL.";
