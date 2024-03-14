@@ -1,7 +1,6 @@
 <?php
     require_once "../config/connexion.php";
     require_once "pfe.php";
-    require_once "etudiant.php";
     class crud_pfe{
         private $connexion;
         public function __construct(){

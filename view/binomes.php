@@ -72,6 +72,19 @@
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
+        .btn-refuser {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: #dc3545; /* Rouge */
+        }
+
+        .btn-accepter {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff; /* Bleu */
+        }
     </style>
 </head>
 <body>
@@ -100,10 +113,31 @@
             <li><span>Nom de l'entreprise:</span> <?php echo isset($binome['nom_entreprise']) ? $binome['nom_entreprise'] : ''; ?></li>
             <li><span>Encadrant de l'entreprise:</span> <?php echo isset($binome['encadrant_entreprise']) ? $binome['encadrant_entreprise'] : ''; ?></li>
             <li><span>Titre du PFE:</span> <?php echo isset($binome['titre']) ? $binome['titre'] : ''; ?></li>
-        </ul>
+            <li><span>Date demande:</span><?php echo isset($binome['date_demande']) ? $binome['date_demande'] : '' ; ?></li>
+            <?php
+           
+                if($binome['validite']==0){
+                    ?>
 
+                    <form method="post" action="">
+                     <button type="submit" name="action" value="refuser" class="btn-refuser">Refuser</button>
+                          <button type="submit" name="action" value="accepter" class="btn-accepter">Accepter</button>
+</form>
+
+                <?php
+                }else{?>
+                    <li><span>Date reponse:</span><?php echo ($binome['date_reponse']) ? $binome['date_reponse'] : '' ; ?></li>
+<?php
+                }
+            ?>
+        </ul>
+                
         <div class="btn-container"> 
-            <button id="afficherFichePFE" type="submit">Afficher fiche PFE</button>
+        <form method="get" action="../controller/afficher_fiche_pfe.php">
+        <input type="hidden" name="pfe_id" value="<?php echo $pfe_id; ?>">
+        <button type="submit">Afficher fiche PFE</button>
+</form>
+            
         </div>
     </div>
     
