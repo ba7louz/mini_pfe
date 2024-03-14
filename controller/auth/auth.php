@@ -13,7 +13,7 @@ class auth {
         $this->secret_key = "Cr7";
     }
     public function login( $payload ) // set the token in new session
-    {
+    {   
         $jwt = JWT::encode( $payload, $this->secret_key, 'HS256' );
         $_SESSION['token'] = $jwt ;
     }
@@ -26,8 +26,12 @@ class auth {
     {
         if( isset($_SESSION['token']) ){
             $decoded = JWT::decode($_SESSION['token'], new Key($this->secret_key, "HS256") );
-            $etudiant = ( new crudetudiant() )->getetudiantById($decoded->user_id);
-            return ( $etudiant ?  true :  false) ;
+            if ($decoded->etat ==0 ){
+                $etudiant = ( new crudetudiant() )->getetudiantById($decoded->user_id);
+                return ( $etudiant ?  true :  false) ;
+            } else if ( $decoded->etat == 1){
+                return true;
+            }
         }
     }
     public function logout(){

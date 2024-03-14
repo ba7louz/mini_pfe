@@ -8,7 +8,7 @@ require_once "../model/etudiant.php";
 require_once "auth/auth.php";
 $auth = new auth();
 if($auth->check()){
-    header("location: inscription_pfe_part1.php");
+    heaader("location: inscription_pfe_part1.php");
 }
 
 $obj = new config();
@@ -38,6 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $res_admin = $connexion->query($sql_admin);
             $adminexist = $res_admin->fetch();
             if ($adminexist) {
+                $payload = array(
+                    "user_id" => $admin['id'],
+                    "type" => 1  // 0 -> Admin
+                );
                 header("location: admin.php");
                 exit();
             }
