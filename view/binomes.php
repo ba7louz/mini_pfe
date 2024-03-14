@@ -116,7 +116,7 @@
             <li><span>Date demande:</span><?php echo isset($binome['date_demande']) ? $binome['date_demande'] : '' ; ?></li>
             <?php
            
-                if($binome['validite']==0){
+                if(($binome['validite']==0)&&($binome['date_reponse']==NULL)){
                     ?>
 
                     <form method="post" action="">
