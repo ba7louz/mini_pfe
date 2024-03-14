@@ -53,7 +53,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
                 $nom_entreprise = htmlspecialchars($_POST['nom_entreprise']  );
                 $encadrant_entreprise = isset ($_POST['encadreur_entreprise']  ) ?  htmlspecialchars($_POST['encadreur_entreprise']  ) : null;
                 $pfe = new pfe(null,$etudiant['id'],$id2,$encadrant_iset ,$nom_entreprise,$encadrant_iset ,$titre,$sujet,  $fileData  , 0 ,null,null);
-                (new pfecrud())->AjoutPfe($pfe);  
+                (new crud_pfe())->AjoutPfe($pfe);  
             }
         }
     }

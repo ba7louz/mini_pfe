@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des binômes</title>
+
     <style>
         body {
             display: flex;
@@ -43,9 +38,8 @@
             background-color: #0056b3; /* Couleur de fond au survol */
         }
     </style>
-</head>
-<body>
-    
+
+  
     <h1>Liste des binômes</h1>
     <table>
         <tr>
@@ -70,5 +64,3 @@
         <?php endforeach; ?>
         
     </table>
-</body>
-</html>

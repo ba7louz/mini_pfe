@@ -3,8 +3,6 @@
 require_once "auth/auth.php";
 $Logged = (new auth)->check();
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
