@@ -8,7 +8,7 @@ require_once "../model/etudiant.php";
 require_once "auth/auth.php";
 $auth = new auth();
 if($auth->check()){
-    header("location: inscription_pfe_part1.php");
+    heaader("location: inscription_pfe_part1.php");
 }
 
 $obj = new config();
