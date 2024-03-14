@@ -43,12 +43,18 @@
         cursor: pointer;
     }
 </style-->
-<link rel="stylesheet" href="../login.css">
 
+<link rel="stylesheet" href="../login.css">
 <div class="form-container">
-    
-    
-    <form action="../controller/inscription_pfe_part1.php" method="post" enctype="multipart/form-data">
+
+    <form       action="../controller/<?php 
+                        if(!isset($pfe)) echo 'inscription_pfe_part1.php'; 
+                        else echo 'modifier_pfe.php';
+                        ?>" 
+                method="post" 
+                enctype="multipart/form-data"
+                
+                >
         <div>
             <span class="title">INSCRIPTION-PFE <?php 
                 $sne=date('Y')-1;
@@ -84,9 +90,22 @@
                 
                 <div><br><h3>Etudiant 2</h3>
                     <label for="cin_ip">
-                        <input class="text" type="text" placeholder="Saisir votre CIN" name="cin2" id="cin_ip">
+                        <input class="text" 
+                        value="<?php
+                            if(isset($pfe) ) if($pfe['id_etudiant2']!=null ) {
+                                if(( new crudetudiant() )->getetudiantById($pfe['id_etudiant2'])['cin'] != $etudiant['cin'] ) {
+                                    echo ( new crudetudiant() )->getetudiantById($pfe['id_etudiant2'])['cin'];
+                                } else{
+                                    echo ( new crudetudiant() )->getetudiantByID($pfe['id_etudiant1'])['cin'];
+                                }
+                            }
+                        
+                        ?>"
+                        type="text" placeholder="Saisir votre CIN" name="cin2" id="cin_ip"
+                        >
                         <span >CIN</span>
                     </label>
+                    <small class="err_mssg" id="cin2_err"><!--?=$cin2_err?--></small>
                 </div>
 
                 <div>
@@ -110,34 +129,34 @@
             <div id="part2" class="part2 part">
                 <div> <br><!--h3>Sujet PFE</h3-->    
                     <label for="titre">
-                        <input id="titre" name="titre" placeholder="Saisir votre titre de projet" required>
+                        <input id="titre" value="<?php if(isset($pfe)) echo $pfe['titre'] ?>" name="titre" placeholder="Saisir votre titre de projet" required>
                         <span class="required">Titre de Projet</span> 
                     </label>
                 </div>
 
                 <div>    
                     <label for="sujet">
-                        <textarea id="sujet" name="sujet" id="" rows="6" placeholder="Saisir votre sujet" required></textarea>
+                        <textarea id="sujet" name="sujet" id="" rows="6" placeholder="Saisir votre sujet" required><?php if(isset($pfe)) echo $pfe['sujet'] ?></textarea>
                         <span class="required">Sujet de Projet</span> 
                     </label>
                 </div>
 
                 <div>
                     <label for="encdrnt">
-                        <input id="encdrnt" type="text" name="encadreur_iset" placeholder="Saisir votre encadreur de projet">
+                        <input id="encdrnt" value="<?php if(isset($pfe)) echo $pfe['encadrant_iset'] ?>" type="text" name="encadreur_iset" placeholder="Saisir votre encadreur de projet">
                         <span >Encadrant ISET </span> 
                     </label>
                 </div>
                 <div>
                     <label for="entrpr">
-                        <input id="entrpr" type="text" name="nom_entreprise" placeholder="Saisir le nom de l'entreprise" required>
+                        <input id="entrpr" value="<?php if(isset($pfe)) echo $pfe['nom_entreprise'] ?>" type="text" name="nom_entreprise" placeholder="Saisir le nom de l'entreprise" required>
                         <span >Nom entreprise* </span> 
                     </label>
                 </div>
 
                 <div>
                     <label for="encdrntentr">
-                        <input id="encdrntentr" type="text" name="encadreur_entreprise" placeholder="saisir le nom de l'encadreur de l'entreprise">
+                        <input id="encdrntentr" value="<?php if(isset($pfe)) echo $pfe['encadrant_entreprise'] ?>" type="text" name="encadreur_entreprise" placeholder="saisir le nom de l'encadreur de l'entreprise">
                         <span >Encadrant entreprise </span> 
                     </label>
                 </div>
@@ -148,10 +167,12 @@
                         <span class="required">Importer fiche PFE </span> 
                     </label>
                 </div>
-                <input type="submit" value="Enregistrer">
+                <?php if(!isset($pfe)){ ?><input type="submit" value="soumettre">
+                <?php }else{ ?><input type="submit" value="Modifier">
+                <?php }?>
                 <input id="prec" type="button" value="Retour">
             </div>
-
+            
         </div>
     </form>
 </div>
@@ -165,13 +186,15 @@
         document.getElementById('divs').classList.remove('next');
     });
 
-
-
     document.getElementById('cin_ip').addEventListener('keyup', () => {
         let str = document.getElementById('cin_ip').value;
-        cin_existence(str);
-    })
 
+        if(str == <?=$etudiant['cin']?> ) document.getElementById('cin2_err').innerHTML="Impossible d'ajouter votre CIN";
+        else{
+            document.getElementById('cin2_err').innerHTML = "";
+            cin_existence(str);
+        }
+    })
     function cin_existence(str) {
         if (str.length === 0) {
             document.getElementById("fullname2").value = "";
@@ -196,4 +219,12 @@
             errorMessageElement.remove();
         }, 15000); 
     }
+                <?php
+                    if(isset($pfe) ) if($pfe['id_etudiant2']!=null ) {
+                    ?>
+    let str = document.getElementById('cin_ip').value;
+    cin_existence(str);
+                <?php
+                    }
+                    ?>
 </script>

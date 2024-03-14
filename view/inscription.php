@@ -30,7 +30,7 @@
         </div>
         <div>
             <label for="password2">
-                <input class="text" id="password2" type="password2" name="mdp2" tabindex="6" required>
+                <input class="text" id="password2" type="password" name="mdp2" tabindex="6" required>
                 <span class="required">Confirmer votre mot de passe</span>
             </label>
         </div>

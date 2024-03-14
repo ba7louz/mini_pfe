@@ -86,6 +86,7 @@ function getEtatBinome($binome) {
         <?php endforeach; ?>
         
     </table>
+    
 
 </body>
 </html>

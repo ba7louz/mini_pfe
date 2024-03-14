@@ -30,10 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     "type" => 0  // 0 -> etudiant
                 );
                 $auth->login($payload);
-
-                header("location: inscription_pfe_part1.php?cin=$cin");
+                header("location: inscription_pfe_part1.php");
                 exit();
-            } 
+            }
             
             $sql_admin = "SELECT * FROM admin WHERE login='$cin' AND password='$password' ";
             $res_admin = $connexion->query($sql_admin);
@@ -42,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("location: admin.php");
                 exit();
             }
-
             $errmsg = "Identifiants ou Mot de passe incorrects";
         }
     }
