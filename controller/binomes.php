@@ -16,17 +16,12 @@ $Logged = (new auth())->check(1);
 $obj = new config();
 $connexion = $obj->getConnexion();
 
-// Vérifier si l'identifiant PFE est passé dans l'URL
 if (isset($_GET['pfe_id'])) {
     $pfe_id = $_GET['pfe_id'];
 
-    // Préparer la requête SQL
     $binome = ((new crud_pfe())->GetStartById($pfe_id) );
 
-    // Vérifier si des résultats ont été retournés
     if ($binome) {
-
-        // Créer les tableaux pour les étudiants
         $etudiant1 = array(
             'cin' => $binome['cin1'],
             'nom' => $binome['nom1'],
@@ -41,55 +36,38 @@ if (isset($_GET['pfe_id'])) {
             'email' => $binome['email2']
         );
 
-        // Vérifier si le bouton Refuser ou Accepter a été cliqué
         if (isset($_POST['action'])) {
             $action = $_POST['action'];
+
+            $mail = (new config())->getMailer();
+            $mail->Subject = "Reponse de votre PFE";
+
             if ($action == 'accepter') {
-                $sql_update_validite_date = "UPDATE pfe SET validite = 1, date_reponse = :date_reponse WHERE id = :pfe_id";
-                $stmt_update_validite_date = $connexion->prepare($sql_update_validite_date);
-                $current_date = date("Y-m-d H:i:s");
-                $stmt_update_validite_date->bindParam(':date_reponse', $current_date);
-                $stmt_update_validite_date->bindParam(':pfe_id', $pfe_id);
-                $stmt_update_validite_date->execute();
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = "smtp.gmail.com";
-                $mail->SMTPAuth = true;
-                $mail->Username = 'ramisassi11@gmail.com';
-                $mail->Password = 'ryfj ztxy pwyp ojyk';
-                $mail->SMTPSecure = 'ssl';
-                $mail->Port = 465;
-                $mail->setFrom("ramisassi11@gmail.com");
-                $mail->addAddress($etudiant1['email']);
-                $mail->isHTML(true);
-                $mail->Subject = "Acceptation de votre PFE";
-                $mail->Body = "Votre PFE a été accepté.";
-                $mail->send();
-                echo "<script>alert('sent')</script>";
-                header("location:admin.php");
+                
+                $res6 = (new crud_pfe())->Accepter($pfe_id);
+                if ($res6){
+                    $mail->addAddress($etudiant1['email']);
+                    $mail->Body = "Votre PFE a été accepté.";
+                    $mail->send();
+                    header("location:admin.php");
+                } else {
+                    echo "<script>alert('some error is happend')</script>";
+                }
+                
             } elseif ($action == 'refuser') {
-                $sql_update_validite_date = "UPDATE pfe SET validite = -1, date_reponse = :date_reponse WHERE id = :pfe_id";
-                $stmt_update_validite_date = $connexion->prepare($sql_update_validite_date);
-                $current_date = date("Y-m-d H:i:s");
-                $stmt_update_validite_date->bindParam(':date_reponse', $current_date);
-                $stmt_update_validite_date->bindParam(':pfe_id', $pfe_id);
-                $stmt_update_validite_date->execute();
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = "smtp.gmail.com";
-                $mail->SMTPAuth = true;
-                $mail->Username = 'ramisassi11@gmail.com';
-                $mail->Password = 'ryfj ztxy pwyp ojyk';
-                $mail->SMTPSecure = 'ssl';
-                $mail->Port = 465;
-                $mail->setFrom("ramisassi11@gmail.com");
+                
+                $res6 = (new crud_pfe())->Refuser($pfe_id);
+                if ($res6){
                 $mail->addAddress($etudiant1['email']);
-                $mail->isHTML(true);
-                $mail->Subject = "refus de votre PFE";
+                
                 $mail->Body = "Votre demande d'inscrit a été refusé .";
                 $mail->send();
-                echo "<script>alert('sent')</script>";
                 header("location:admin.php");
+                }else{
+                    echo "<script>alert('Some error is happend')</script>";
+                }
+                
+                
             }
         }
 

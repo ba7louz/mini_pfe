@@ -7,7 +7,6 @@
             $obj = new config();
             $this->connexion = $obj->getConnexion();
         }
-
         public function getPfeByIdEtudiant($id){
             $sql="  select * from pfe 
                     where   id_etudiant1=$id 
@@ -16,7 +15,6 @@
             $res=$this->connexion->query($sql);
             return  $res->fetch(PDO::FETCH_ASSOC);
         }
-
         public function AjoutPfe(pfe $pfe){
             $stmt = $this->connexion->prepare("INSERT INTO pfe VALUES (
                     null,
@@ -36,7 +34,6 @@
             $stmt->bindParam(8, $pfe->fiche_pfe, PDO::PARAM_LOB);
             return $stmt->execute();
         }
-
         public function EditPfe(pfe $pfe){
             $stmt = $this->connexion->prepare(
                 "
@@ -83,7 +80,7 @@
             $sql = "SELECT e1.nom AS nom1, e1.prenom AS prenom1, c1.nom_classe AS classe1,
                         e2.nom AS nom2, e2.prenom AS prenom2, c2.nom_classe AS classe2,
                         p.id AS pfe_id,
-                        p.date_reponse,
+                        p.date_reponse as DateD,
                         p.validite
                     FROM pfe p
                     INNER JOIN etudiant e1 ON p.id_etudiant1 = e1.id
@@ -144,5 +141,17 @@
             return $ret ;
 
         }
-
+        public function Refuser($id){
+            $sql = "UPDATE pfe SET validite = -1, date_reponse = NOW() WHERE id = :pfe_id";
+            echo $sql;
+            $stmt = $this->connexion->prepare($sql);
+            $stmt->bindParam(':pfe_id', $pfe_id);
+            $stmt->execute();
+        }
+        public function Accepter($id){
+            $sql = "UPDATE pfe SET validite = 1, date_reponse = NOW() WHERE id = :pfe_id";
+                $stmt = $this->connexion->prepare($sql);
+                $stmt->bindParam(':pfe_id', $pfe_id);
+                $stmt->execute();
+        }
 }
