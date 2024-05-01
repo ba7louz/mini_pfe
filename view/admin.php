@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des binômes</title>
+
     <style>
          body {
             display: flex;
@@ -42,9 +37,22 @@
         .btn-link:hover {
             background-color: #0056b3; /* Couleur de fond au survol */
         }
+        .encours {
+            background: #f0b812 !important;
+            color: black !important;
+            font-weight: 600 !important;
+        }
+        .accepte {
+            background: #2eff1e !important;
+            color: white !important;
+            font-weight: 600 !important;
+        }
+        .refuse {
+            background: #ff1e1e !important;
+            color: white !important;
+            font-weight: 600 !important;
+        }
     </style>
-
-  
     <h1>Liste des binômes</h1>
     <table>
         <tr>
@@ -58,18 +66,30 @@
             <th>Action</th>
         </tr>
         <?php foreach ($binomes as $binome) : ?>
-        <tr>
+            
+        <?php
+            switch( $binome['validite'] ) { 
+                case 0:echo "<tr class='encours' >";break;
+                case 1:echo "<tr class='accepte' >";break;
+                case -1:echo "<tr class='refuse' >";break;
+            } 
+        ?>
+        
             <td><?php echo $binome['nom1']; ?></td>
             <td><?php echo $binome['prenom1']; ?></td>
             <td><?php echo $binome['classe1']; ?></td>
             <td><?php echo $binome['nom2']; ?></td>
             <td><?php echo $binome['prenom2']; ?></td>
             <td><?php echo $binome['classe2']; ?></td>
-            <td><?php echo getEtatBinome($binome); ?></td>
+            <?php
+                switch( $binome['validite'] ) { 
+                    case 0: {echo "<td class='encours' >Encours</td>";break;}
+                    case 1:{echo "<td class='accepte' >validée</td>";break;}
+                    case -1:{echo "<td class='refuse' >refusée<td>";break;}
+                } 
+            ?>
             <td><a href="binomes.php?pfe_id=<?php echo $binome['pfe_id']; ?>" class="btn-link">Afficher</a></td>
         </tr>
         <?php endforeach; ?>
         
     </table>
-</body>
-</html>

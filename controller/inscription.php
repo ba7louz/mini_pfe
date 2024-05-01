@@ -7,7 +7,7 @@ session_start();
 // redirect
 require_once "auth/auth.php";
 $auth = new auth();
-if($auth->check()){
+if($auth->check(-1)){
     header("location: inscription_pfe_part1.php");
 }
 

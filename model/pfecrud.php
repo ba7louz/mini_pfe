@@ -7,6 +7,7 @@
             $obj = new config();
             $this->connexion = $obj->getConnexion();
         }
+
         public function getPfeByIdEtudiant($id){
             $sql="  select * from pfe 
                     where   id_etudiant1=$id 
@@ -15,6 +16,7 @@
             $res=$this->connexion->query($sql);
             return  $res->fetch(PDO::FETCH_ASSOC);
         }
+
         public function AjoutPfe(pfe $pfe){
             $stmt = $this->connexion->prepare("INSERT INTO pfe VALUES (
                     null,
@@ -34,6 +36,7 @@
             $stmt->bindParam(8, $pfe->fiche_pfe, PDO::PARAM_LOB);
             return $stmt->execute();
         }
+
         public function EditPfe(pfe $pfe){
             $stmt = $this->connexion->prepare(
                 "
@@ -75,5 +78,71 @@
                 $stmt->bindParam(2, $id);
                 $stmt->execute();
             }
-    }
+        }
+        public function ListPfe(){
+            $sql = "SELECT e1.nom AS nom1, e1.prenom AS prenom1, c1.nom_classe AS classe1,
+                        e2.nom AS nom2, e2.prenom AS prenom2, c2.nom_classe AS classe2,
+                        p.id AS pfe_id,
+                        p.date_reponse,
+                        p.validite
+                    FROM pfe p
+                    INNER JOIN etudiant e1 ON p.id_etudiant1 = e1.id
+                    INNER JOIN classe c1 ON e1.id_classe = c1.id
+                    INNER JOIN etudiant e2 ON p.id_etudiant2 = e2.id
+                    INNER JOIN classe c2 ON e2.id_classe = c2.id";
+            $res=$this->connexion->query($sql);
+            $ret = $res->fetchAll(PDO::FETCH_ASSOC);
+            return $ret ;
+        }
+        public function GetById($id){
+            $sql = "SELECT 
+                        p.fiche_pfe,
+                        e1.nom AS nom1,
+                        e1.prenom AS prenom1,
+                        e2.nom AS nom2,
+                        e2.prenom AS prenom2
+                    FROM 
+                        pfe p
+                    INNER JOIN 
+                        etudiant e1 ON p.id_etudiant1 = e1.id
+                    INNER JOIN 
+                        etudiant e2 ON p.id_etudiant2 = e2.id
+                    WHERE 
+                        p.id = " .$id ;
+                $res=$this->connexion->query($sql);
+                $ret = $res->fetch(PDO::FETCH_ASSOC);
+                return $ret ;
+        }
+        public function GetstartById($id){
+            $sql = "SELECT 
+                p.encadrant_iset, 
+                p.nom_entreprise, 
+                p.encadrant_entreprise, 
+                p.titre, 
+                p.fiche_pfe,
+                p.date_demande,
+                p.date_reponse,
+                p.validite,
+                e1.cin AS cin1,
+                e1.nom AS nom1,
+                e1.prenom AS prenom1,
+                e1.email AS email1,
+                e2.cin AS cin2,
+                e2.nom AS nom2,
+                e2.prenom AS prenom2,
+                e2.email AS email2
+            FROM 
+                pfe p
+            INNER JOIN 
+                etudiant e1 ON p.id_etudiant1 = e1.id
+            INNER JOIN 
+                etudiant e2 ON p.id_etudiant2 = e2.id
+            WHERE 
+                p.id = ".$id;
+            $res=$this->connexion->query($sql);
+            $ret = $res->fetch(PDO::FETCH_ASSOC);
+            return $ret ;
+
+        }
+
 }

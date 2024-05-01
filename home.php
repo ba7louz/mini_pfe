@@ -1,8 +1,7 @@
 <?php
 // Global includes
 require_once "auth/auth.php";
-$Logged = (new auth)->check();
-
+$Logged = (new auth())->check(-1);
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -22,19 +22,22 @@ class auth {
         $decoded = JWT::decode($_SESSION['token'], new Key($this->secret_key, "HS256") );
         return $decoded;
     }
-    public function check() // return true if the token is valid and the user exists -- delete the expired-token or if the user does not exist
+    public function check($t) // return true if the token is valid and the user exists -- delete the expired-token or if the user does not exist
     {
         if( isset($_SESSION['token']) ){
             $decoded = JWT::decode($_SESSION['token'], new Key($this->secret_key, "HS256") );
-            if ($decoded->etat ==0 ){
+            if ($decoded->type ==0 && ($t == 0 ||$t == -1) ){
                 $etudiant = ( new crudetudiant() )->getetudiantById($decoded->user_id);
-                return ( $etudiant ?  true :  false) ;
-            } else if ( $decoded->etat == 1){
+                echo "<script>alert('student session')</script>";
+                return ( $etudiant  ?  true  :  false) ;
+            } else if ( $decoded->type == 1 && ($t == 1 ||$t == -1)){
                 return true;
             }
         }
+        return false;
     }
     public function logout(){
         session_destroy();
+        header('location:login.php');
     }
 }
