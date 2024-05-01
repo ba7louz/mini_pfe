@@ -7,7 +7,7 @@ $connexion = $obj->getConnexion();
 if(isset($_GET['pfe_id'])) {
     $pfe_id = $_GET['pfe_id'];
 
-    $result = ((new crud_pfe())->GetById($pfe_id) );
+    $result = ((new crud_pfe())->GetstartById($pfe_id) );
     
     if( $result ) {
         // Récupérer le chemin de la fiche PFE et les données des étudiants
@@ -15,18 +15,16 @@ if(isset($_GET['pfe_id'])) {
         $nom_etudiant1 = $result['nom1'] . '_' . $result['prenom1'];
         $nom_etudiant2 = $result['nom2'] . '_' . $result['prenom2'];
 
-
         // Vérifier si le fichier existe
-        if(file_exists($fiche_pfe_path)) {
-            // Télécharger la fiche PFE avec un nom de fichier personnalisé
-            header("Content-type: application/pdf");
-            header("Content-Disposition: attachment; filename='$nom_etudiant1-$nom_etudiant2-PFE.pdf'");
-            readfile($fiche_pfe_path);
-            exit; // Arrêter l'exécution du script après le téléchargement du fichier
-            
-        } else {
-            echo "La fiche PFE n'existe pas.";
-        }
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: inline; filename='.$nom_etudiant1.'_'.$nom_etudiant2.'_PFE.pdf');
+        header('Content-Transfer-Encoding: binary');
+        header('Accept-Ranges: bytes');
+        header('Content-Length: ' . strlen($fiche_pfe_path));
+        echo ($fiche_pfe_path);
+        exit; // Arrêter l'exécution du script après le téléchargement du fichier
+         
     } else {
         echo "Aucun enregistrement PFE trouvé.";
     }

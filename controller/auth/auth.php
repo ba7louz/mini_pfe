@@ -28,7 +28,6 @@ class auth {
             $decoded = JWT::decode($_SESSION['token'], new Key($this->secret_key, "HS256") );
             if ($decoded->type ==0 && ($t == 0 ||$t == -1) ){
                 $etudiant = ( new crudetudiant() )->getetudiantById($decoded->user_id);
-                echo "<script>alert('student session')</script>";
                 return ( $etudiant  ?  true  :  false) ;
             } else if ( $decoded->type == 1 && ($t == 1 ||$t == -1)){
                 return true;

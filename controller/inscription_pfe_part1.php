@@ -26,7 +26,6 @@ if( isset($_SESSION['token']) ){
         if($res) $pfe = $res;
     }
 }
-
 $err1 = "";
 $err2 = "";
 if( $_SERVER['REQUEST_METHOD'] === 'POST' ){

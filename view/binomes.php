@@ -96,17 +96,22 @@
         <li><span>CIN:</span> <?php echo isset($etudiant1['cin']) ? $etudiant1['cin'] : ''; ?></li>
         <li><span>Nom:</span> <?php echo isset($etudiant1['nom']) ? $etudiant1['nom'] : ''; ?></li>
         <li><span>Prénom:</span> <?php echo isset($etudiant1['prenom']) ? $etudiant1['prenom'] : ''; ?></li>
+        <li><span>classe:</span> <?php echo isset($c1['nom_classe']) ?$c1['nom_classe'] : ''; ?></li>
         <li><span>Email:</span> <?php echo isset($etudiant1['email']) ? $etudiant1['email'] : ''; ?></li>
     </ul>
 
+    <?php if($etudiant2){ ?>
     <h2>Étudiant 2</h2>
     <ul class="etudiant-info">
         <li><span>CIN:</span> <?php echo isset($etudiant2['cin']) ? $etudiant2['cin'] : ''; ?></li>
         <li><span>Nom:</span> <?php echo isset($etudiant2['nom']) ? $etudiant2['nom'] : ''; ?></li>
         <li><span>Prénom:</span> <?php echo isset($etudiant2['prenom']) ? $etudiant2['prenom'] : ''; ?></li>
+        <li><span>classe:</span> <?php echo isset($c2['nom_classe']) ?$c2['nom_classe'] : ''; ?></li>
         <li><span>Email:</span> <?php echo isset($etudiant2['email']) ? $etudiant2['email'] : ''; ?></li>
     </ul>
-
+    <?php 
+    }
+    ?>
     <h2>Informations sur le PFE</h2>
     <ul class="pfe-info">
         <li><span>Encadrant ISET:</span> <?php echo isset($binome['encadrant_iset']) ? $binome['encadrant_iset'] : ''; ?></li>
@@ -133,10 +138,11 @@
     </ul>
 
     <div class="btn-container">
-        <form method="get" action="../controller/afficher_fiche_pfe.php">
-            <input type="hidden" name="pfe_id" value="<?php echo $pfe_id; ?>">
-            <button type="submit">Afficher fiche PFE</button>
-        </form>
+        
+            <a href="../controller/afficher_fiche_pfe.php?pfe_id=<?= $pfe_id; ?>" target="_blank"> 
+                <button type="submit" >Afficher fiche PFE</button>
+            </a>
+        
 
     </div>
 </div>

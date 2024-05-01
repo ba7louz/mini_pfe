@@ -5,6 +5,8 @@ ob_start();
 // import --------------------------
 require_once "../config/connexion.php";
 require_once "../model/pfecrud.php";
+require_once "../model/crudetudiant.php";
+require_once "../model/classecrud.php";
 require_once "auth/auth.php";
 
 // authentification -----------------

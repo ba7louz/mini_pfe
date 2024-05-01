@@ -42,10 +42,8 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
         }else {
             $errorMessage = "CIN et mot de passe est invalide";
         }
-
     }
 }
-
 /* get classes */
 require_once "../model/classecrud.php";
 $classes = (new crudclasse())->getAll();

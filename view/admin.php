@@ -146,6 +146,33 @@
         border: unset !important;
         color: var(--primary-btn-text)
     }
+
+    .mb-2.hdd {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        margin: 20px;
+    }
+
+    .telecharger {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 20px;
+        background: #5b99f5;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 5px;
+        box-shadow: 0px 1px 2px 0px rgb(60 64 67 / 25%), 0px 2px 6px 2px rgb(60 64 67 / 10%);
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .telecharger:hover {
+        background: #2974e4;
+        box-shadow: 0px 1px 10px 5px rgb(60 64 67 / 25%), 0px 2px 6px 2px rgb(60 64 67 / 10%);
+    }
 </style>
 
 <!-- //Bootstrap CDN -->
@@ -163,11 +190,11 @@
         <div class="main-sub row align-items-center pt-5">
         </div>
         <div class="table-container mt-5">
-            <div class="mb-2">
+            <div class="mb-2 hdd">
                 <h2 class="">Liste des binômes</h2>
-                <!-- <small class="text-secondary"
-                >Les demandes </small
-              > -->
+                <a href="downloadXl.php"> 
+                    <div class="telecharger">Télécharger </div>
+                </a>
             </div>
             <table id="mytable" class="table align-middle mb-0 bg-white">
                 <thead class="bg-light">
@@ -185,27 +212,53 @@
                 <tbody>
 
                     <?php foreach ($binomes as $binome) : ?>
+
+                        <?php
+                        $et1 = (new crudetudiant())->getetudiantById($binome["id_etudiant1"]);
+                        $c1 = (new crudclasse())->getById($et1["id_classe"]);
+                        $et2 = null;
+                        $c2 = null;
+                        if ($binome["id_etudiant2"]) {
+                            $et2 = (new crudetudiant())->getetudiantById($binome["id_etudiant2"]);
+                            $c2 = (new crudclasse())->getById($et2["id_classe"]);
+                        }
+                        ?>
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div class="">
-                                        <p class="fw-bold mb-1"><?= $binome["pfe_id"] ?></p>
+                                        <p class="fw-bold mb-1"><?= $binome["id"] ?></p>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <p class="fw-bold fw-normal mb-1"><?= $binome['nom1'] . " " . $binome['prenom1'] ?></p>
+                                <p class="fw-bold fw-normal mb-1"><?= $et1["nom"] . " " . $et1["prenom"]  ?></p>
                             </td>
                             <td>
-                                <?= $binome['classe1'] ?>
+                                <?= $c1["nom_classe"] ?>
                             </td>
-                            <td>
-                                <p class="fw-bold fw-normal mb-1"><?= $binome['nom2'] . " " . $binome['prenom2'] ?></p>
-                            </td>
-                            <td>
-                                <?= $binome['classe2'] ?>
-                            </td>
+                            <?php
+                            if ($et2) {
+                            ?>
+                                <td>
+                                    <p class="fw-bold fw-normal mb-1"><?= $et2['nom'] . " " . $et2['prenom'] ?></p>
+                                </td>
+                                <td>
+                                    <?= $c2['nom_classe'] ?>
+                                </td>
+                            <?php
+                            } else {
+                            ?>
+                                <td>
+                                    ****
+                                </td>
+                                <td>
+                                    ****
+                                </td>
+                            <?php
+                            }
 
+                            ?>
 
                             <td>
                                 <div class="">
@@ -236,7 +289,7 @@
                             <td>
                                 <button type="button" class="btn btn-link btn-sm btn-rounded text-primary">
                                     <i class="me-1 action-icon bi bi-file-earmark-richtext text-primary"></i>
-                                    <a href="binomes.php?pfe_id=<?php echo $binome['pfe_id']; ?>" class="btn-link">Afficher</a>
+                                    <a href="binomes.php?pfe_id=<?= $binome['id'] ?>" class="btn-link">Afficher</a>
                                 </button>
                             </td>
                         </tr>
@@ -244,6 +297,8 @@
 
                 </tbody>
             </table>
+            
+            
             <nav class="mt-4">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
@@ -257,6 +312,8 @@
                     </li>
                 </ul>
             </nav>
+
+
         </div>
     </div>
 </div>

@@ -9,6 +9,10 @@ require '../phpmailer/src/Exception.php';
 require '../phpmailer/src/PHPMailer.php';
 require '../phpmailer/src/SMTP.php';
 require_once "../model/pfecrud.php";
+require_once "../model/crudetudiant.php";
+require_once "../model/classecrud.php";
+
+$ce = new crudetudiant();
 
 require_once "auth/auth.php";
 $Logged = (new auth())->check(1);
@@ -19,27 +23,22 @@ $connexion = $obj->getConnexion();
 if (isset($_GET['pfe_id'])) {
     $pfe_id = $_GET['pfe_id'];
 
-    $binome = ((new crud_pfe())->GetStartById($pfe_id) );
+    $binome = ((new crud_pfe())->GetstartById($pfe_id) );
 
     if ($binome) {
-        $etudiant1 = array(
-            'cin' => $binome['cin1'],
-            'nom' => $binome['nom1'],
-            'prenom' => $binome['prenom1'],
-            'email' => $binome['email1']
-        );
-
-        $etudiant2 = array(
-            'cin' => $binome['cin2'],
-            'nom' => $binome['nom2'],
-            'prenom' => $binome['prenom2'],
-            'email' => $binome['email2']
-        );
+        $etudiant1 = $ce ->getetudiantById($binome["id_etudiant1"]);
+        $c1  = (new crudclasse())->getById( $etudiant1["id_classe"] );
+        $etudiant2 = null ;
+        if($binome["id_etudiant2"]){
+            $etudiant2 =  $ce->getetudiantById($binome["id_etudiant2"]);
+            $c2 = (new crudclasse())->getById( $etudiant2 ["id_classe"] );
+        }
 
         if (isset($_POST['action'])) {
             $action = $_POST['action'];
 
             $mail = (new config())->getMailer();
+
             $mail->Subject = "Reponse de votre PFE";
 
             if ($action == 'accepter') {
