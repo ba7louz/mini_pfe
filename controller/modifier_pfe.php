@@ -8,7 +8,7 @@ require_once "../model/pfecrud.php";
 //redirect
 require_once "auth/auth.php";
 $auth = new auth();
-if(!$auth->check()){
+if(!$auth->check(0)){
     header("location: login.php");
 }
 

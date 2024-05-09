@@ -9,7 +9,7 @@ require_once "../model/pfecrud.php";
 //redirect
 require_once "auth/auth.php";
 $auth = new auth();
-if(!$auth->check()){
+if(!$auth->check(-1)){
     header("location: login.php");
 }
 
@@ -26,7 +26,6 @@ if( isset($_SESSION['token']) ){
         if($res) $pfe = $res;
     }
 }
-
 $err1 = "";
 $err2 = "";
 if( $_SERVER['REQUEST_METHOD'] === 'POST' ){

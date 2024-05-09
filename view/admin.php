@@ -1,17 +1,3 @@
-<?php
-function getEtatBinome($binome) {
-    if ($binome['date_reponse'] === null) {
-        return "Pas encore répondu";
-    } elseif ($binome['date_reponse'] !== null && $binome['validite'] == 0) {
-        return "Refusé";
-    } elseif ($binome['date_reponse'] !== null && $binome['validite'] == 1) {
-        return "Accepté";
-    } else {
-        return "État inconnu";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -57,9 +43,8 @@ function getEtatBinome($binome) {
             background-color: #0056b3; /* Couleur de fond au survol */
         }
     </style>
-</head>
-<body>
-    
+
+  
     <h1>Liste des binômes</h1>
     <table>
         <tr>
@@ -86,7 +71,5 @@ function getEtatBinome($binome) {
         <?php endforeach; ?>
         
     </table>
-    
-
 </body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

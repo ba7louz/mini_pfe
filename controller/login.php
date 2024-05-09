@@ -7,8 +7,8 @@ require_once "../model/etudiant.php";
 
 require_once "auth/auth.php";
 $auth = new auth();
-if($auth->check()){
-    heaader("location: inscription_pfe_part1.php");
+if($auth->check(-1)){
+    header("location: inscription_pfe_part1.php");
 }
 
 $obj = new config();
@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     "user_id" => $admin['id'],
                     "type" => 1  // 0 -> Admin
                 );
+                $auth->login($payload);
                 header("location: admin.php");
                 exit();
             }

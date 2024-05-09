@@ -7,7 +7,7 @@ session_start();
 // redirect
 require_once "auth/auth.php";
 $auth = new auth();
-if($auth->check()){
+if($auth->check(-1)){
     header("location: inscription_pfe_part1.php");
 }
 
@@ -42,10 +42,8 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
         }else {
             $errorMessage = "CIN et mot de passe est invalide";
         }
-
     }
 }
-
 /* get classes */
 require_once "../model/classecrud.php";
 $classes = (new crudclasse())->getAll();
