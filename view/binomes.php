@@ -71,20 +71,21 @@
     }
 
     .btn-refuser {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
+
         background-color: #dc3545;
         /* Rouge */
     }
 
     .btn-accepter {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
+
         background-color: #007bff;
         /* Bleu */
     }
+    form {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+    }   
 </style>
 
 
@@ -119,6 +120,12 @@
         <li><span>Encadrant de l'entreprise:</span> <?php echo isset($binome['encadrant_entreprise']) ? $binome['encadrant_entreprise'] : ''; ?></li>
         <li><span>Titre du PFE:</span> <?php echo isset($binome['titre']) ? $binome['titre'] : ''; ?></li>
         <li><span>Date demande:</span><?php echo isset($binome['date_demande']) ? $binome['date_demande'] : ''; ?></li>
+        <li><span>Fiche PFE:</span>
+            <a href="../controller/afficher_fiche_pfe.php?pfe_id=<?= $pfe_id; ?>" target="_blank"> 
+                <button type="submit" >Afficher fiche PFE</button>
+            </a>
+        </li>  
+           
         <?php
 
         if (($binome['validite'] == 0) && ($binome['date_reponse'] == NULL)) {
@@ -139,9 +146,7 @@
 
     <div class="btn-container">
         
-            <a href="../controller/afficher_fiche_pfe.php?pfe_id=<?= $pfe_id; ?>" target="_blank"> 
-                <button type="submit" >Afficher fiche PFE</button>
-            </a>
+            
         
 
     </div>
