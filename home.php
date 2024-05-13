@@ -14,6 +14,11 @@ $Logged = (new auth())->check(-1);
 
       <!--=============== CSS ===============-->
       <link rel="stylesheet" href="../assets/css/styles.css">
+      <style>
+         a{
+            text-decoration:none !important;
+         }
+      </style>
 
     <title>Document</title>
 </head>
@@ -34,13 +39,26 @@ $Logged = (new auth())->check(-1);
             <!--=============== NAV MENU ===============-->
             <div class="nav__menu" id="nav-menu">
                <ul class="nav__list">
+               <?php
+                  if((new auth())->check(1)){
+                        ?>
+                        <li><a href="admin.php" class="nav__link">Liste Pfe</a></li>
+                        <?php
+                  }
+               ?>
 
                <?php if (!$Logged){
                ?>
+                  
                   <li><a href="login.php" class="nav__link">Login</a></li>
                   <li><a href="inscription.php" class="nav__link">Inscription</a></li>
                <?php
+
+
+
                }else{ 
+                  
+               
                ?>
 
                   <li class="dropdown__item">
@@ -63,7 +81,7 @@ $Logged = (new auth())->check(-1);
                <?php
                }
                ?>
-<!--
+                     <!--
                         <li class="dropdown__subitem">
                            <div class="dropdown__link">
                               <i class="ri-bar-chart-line"></i> Reports <i class="ri-add-line dropdown__add"></i>

@@ -15,7 +15,10 @@ require_once "../model/classecrud.php";
 $ce = new crudetudiant();
 
 require_once "auth/auth.php";
-$Logged = (new auth())->check(1);
+$auth = new auth();
+if(!$auth->check(1)){
+    header("location: login.php");
+}
 
 $obj = new config();
 $connexion = $obj->getConnexion();

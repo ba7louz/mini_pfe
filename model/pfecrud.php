@@ -68,11 +68,11 @@
             $stmt->bindParam(6,$id);
             $stmt->execute();
 
-            if($pfe->fiche_pfe){
-                $stmt = $this->connexion->prepare(
-                    "
+            if( $pfe->getFichePfe() !== null){
+                $stmt = $this->connexion->prepare(                  "
                         update from pfe
-                        fiche_pfe = ?
+                        set
+                        fiche_pfe = ? 
                         where id = ?
                     "
                 );
@@ -113,9 +113,9 @@
                         etudiant e2 ON p.id_etudiant2 = e2.id
                     WHERE 
                         p.id = " .$id ;
+                echo $sql;
                 $res=$this->connexion->query($sql);
-                $ret = $res->fetch(PDO::FETCH_ASSOC);
-                return $ret ;
+                return $res->fetch(PDO::FETCH_ASSOC);
         }
         public function GetstartById($id){
             $sql = "SELECT 
