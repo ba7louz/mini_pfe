@@ -14,6 +14,11 @@ $Logged = (new auth())->check(-1);
 
       <!--=============== CSS ===============-->
       <link rel="stylesheet" href="../assets/css/styles.css">
+      <style>
+         a{
+            text-decoration:none !important;
+         }
+      </style>
 
     <title>Document</title>
 </head>
@@ -34,11 +39,22 @@ $Logged = (new auth())->check(-1);
             <!--=============== NAV MENU ===============-->
             <div class="nav__menu" id="nav-menu">
                <ul class="nav__list">
+               <?php
+                  if((new auth())->check(1)){
+                        ?>
+                        <li><a href="admin.php" class="nav__link">Liste Pfe</a></li>
+                        <?php
+                  }
+               ?>
 
-               <?php if (!$Logged){ ?>
+               <?php if (!$Logged){
+               ?>
                   <li><a href="login.php" class="nav__link">Login</a></li>
                   <li><a href="inscription.php" class="nav__link">Inscription</a></li>
-               <?php } else { ?>
+               <?php
+               }else{ 
+               ?>
+
                   <li class="dropdown__item">
                      <a href="#" class="nav__link">Profil</a>
                      <ul class="dropdown__menu">
@@ -54,7 +70,62 @@ $Logged = (new auth())->check(-1);
                         </li>
                      </ul>
                   </li>
-               <?php } ?>
+               <?php
+               }
+               ?>
+<!--
+                        <li class="dropdown__subitem">
+                           <div class="dropdown__link">
+                              <i class="ri-bar-chart-line"></i> Reports <i class="ri-add-line dropdown__add"></i>
+                           </div>
+
+                           <ul class="dropdown__submenu">
+                              <li>
+                                 <a href="#" class="dropdown__sublink">
+                                    <i class="ri-file-list-line"></i> Documents
+                                 </a>
+                              </li>
+      
+                              <li>
+                                 <a href="#" class="dropdown__sublink">
+                                    <i class="ri-cash-line"></i> Payments
+                                 </a>
+                              </li>
+      
+                              <li>
+                                 <a href="#" class="dropdown__sublink">
+                                    <i class="ri-refund-2-line"></i> Refunds
+                                 </a>
+                              </li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>            
+                  <li><a href="#" class="nav__link">Products</a></li>
+                  <li class="dropdown__item">
+                     <div class="nav__link">
+                        Users <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                     </div>
+                     <ul class="dropdown__menu">
+                        <li>
+                           <a href="#" class="dropdown__link">
+                              <i class="ri-user-line"></i> Profiles
+                           </a>                          
+                        </li>
+                        <li>
+                           <a href="#" class="dropdown__link">
+                              <i class="ri-lock-line"></i> Accounts
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="dropdown__link">
+                              <i class="ri-message-3-line"></i> Messages
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li><a href="#" class="nav__link">Contact</a></li> 
+                -->
                </ul>
             </div>
          </nav>

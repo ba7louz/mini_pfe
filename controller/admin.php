@@ -10,7 +10,12 @@ require_once "../model/classecrud.php";
 require_once "auth/auth.php";
 
 // authentification -----------------
-$Logged = (new auth())->check(1);
+
+require_once "auth/auth.php";
+$auth = new auth();
+if(!$auth->check(1)){
+    header("location: login.php");
+}
 
 // PFE FindAll ----------------------
 $binomes = ( ( new crud_pfe() )->ListPfe() );

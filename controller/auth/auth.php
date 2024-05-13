@@ -29,7 +29,7 @@ class auth {
             if ($decoded->type ==0 && ($t == 0 ||$t == -1) ){
                 $etudiant = ( new crudetudiant() )->getetudiantById($decoded->user_id);
                 return ( $etudiant  ?  true  :  false) ;
-            } else if ( $decoded->type == 1 && ($t == 1 ||$t == -1)){
+            } else if ( $decoded->type == 1 && ($t == 1 || $t == -1) ){
                 return true;
             }
         }
@@ -38,5 +38,6 @@ class auth {
     public function logout(){
         session_destroy();
         header('location:login.php');
+        die();
     }
 }
