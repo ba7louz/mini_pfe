@@ -49,5 +49,11 @@
                 $res=$this->connexion->exec($sql);
                 return $res;
         }
+        public function modifierEmailEtudiant($id, $nouvelEmail){
+            $sql = "UPDATE etudiant SET email = '{$nouvelEmail}' WHERE id = {$id}";
+            $res = $this->connexion->exec($sql);
+            return $res;
+        }
+        
     }
 ?>
